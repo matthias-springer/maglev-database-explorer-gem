@@ -1002,6 +1002,22 @@ referencedClasses: []
 smalltalk.MaglevIcon.klass);
 
 smalltalk.addMethod(
+unescape('_globe'),
+smalltalk.method({
+selector: unescape('globe'),
+category: 'instance creation',
+fn: function (){
+var self=this;
+return (function($rec){smalltalk.send($rec, "_icon_", ["globe"]);return smalltalk.send($rec, "_yourself", []);})(smalltalk.send(self, "_new", []));
+return self;},
+args: [],
+source: unescape('globe%0A%09%5E%20self%20new%0A%09%09icon%3A%20%27globe%27%3B%0A%09%09yourself'),
+messageSends: ["icon:", "yourself", "new"],
+referencedClasses: []
+}),
+smalltalk.MaglevIcon.klass);
+
+smalltalk.addMethod(
 unescape('_hdd'),
 smalltalk.method({
 selector: unescape('hdd'),
@@ -4105,11 +4121,11 @@ selector: unescape('renderCloseButtonOn%3A'),
 category: 'rendering',
 fn: function (html){
 var self=this;
-(function($rec){smalltalk.send($rec, "_class_", [unescape("display-inline-block")]);return smalltalk.send($rec, "_with_", [(function(){return (function($rec){smalltalk.send($rec, "_href_", [unescape("%23")]);smalltalk.send($rec, "_class_", [unescape("window-close-button")]);smalltalk.send($rec, "_onClick_", [(function(){return smalltalk.send(self, "_closeWindow", []);})]);return smalltalk.send($rec, "_with_", [smalltalk.send((smalltalk.MaglevIcon || MaglevIcon), "_remove", [])]);})(smalltalk.send(html, "_a", []));})]);})(smalltalk.send(html, "_span", []));
+(function($rec){smalltalk.send($rec, "_class_", [unescape("display-inline-block")]);smalltalk.send($rec, "_style_", [unescape("float%3A%20right%3B%20margin-top%3A%203px%3B%20margin-left%3A%203px%3B")]);return smalltalk.send($rec, "_with_", [(function(){return (function($rec){smalltalk.send($rec, "_href_", [unescape("%23")]);smalltalk.send($rec, "_class_", [unescape("window-close-button")]);smalltalk.send($rec, "_onClick_", [(function(){return smalltalk.send(self, "_closeWindow", []);})]);return smalltalk.send($rec, "_with_", [smalltalk.send((smalltalk.MaglevIcon || MaglevIcon), "_remove", [])]);})(smalltalk.send(html, "_a", []));})]);})(smalltalk.send(html, "_span", []));
 return self;},
 args: ["html"],
-source: unescape('renderCloseButtonOn%3A%20html%0A%09html%20span%0A%09%09class%3A%20%27display-inline-block%27%3B%0A%09%09with%3A%20%5Bhtml%20a%0A%09%09%09%09href%3A%20%27%23%27%3B%0A%09%09%09%09class%3A%20%27window-close-button%27%3B%0A%09%09%09%09onClick%3A%20%5Bself%20closeWindow%5D%3B%0A%09%09%09%09with%3A%20MaglevIcon%20remove%5D.'),
-messageSends: ["class:", "with:", "href:", "onClick:", "closeWindow", "remove", "a", "span"],
+source: unescape('renderCloseButtonOn%3A%20html%0A%09html%20span%0A%09%09class%3A%20%27display-inline-block%27%3B%0A%09%09style%3A%20%27float%3A%20right%3B%20margin-top%3A%203px%3B%20margin-left%3A%203px%3B%27%3B%0A%09%09with%3A%20%5Bhtml%20a%0A%09%09%09%09href%3A%20%27%23%27%3B%0A%09%09%09%09class%3A%20%27window-close-button%27%3B%0A%09%09%09%09onClick%3A%20%5Bself%20closeWindow%5D%3B%0A%09%09%09%09with%3A%20MaglevIcon%20remove%5D.'),
+messageSends: ["class:", "style:", "with:", "href:", "onClick:", "closeWindow", "remove", "a", "span"],
 referencedClasses: ["MaglevIcon"]
 }),
 smalltalk.MaglevWindow);
@@ -6034,5 +6050,113 @@ referencedClasses: ["MaglevIcon"]
 }),
 smalltalk.MaglevWaitingWindow);
 
+
+
+smalltalk.addClass('MaglevWebBrowserWindow', smalltalk.MaglevWindow, ['url', 'inputUrl', 'iframe'], 'Maglev-Database-Explorer');
+smalltalk.addMethod(
+unescape('_renderWindowContentOn_'),
+smalltalk.method({
+selector: unescape('renderWindowContentOn%3A'),
+category: 'rendering',
+fn: function (html){
+var self=this;
+var iframeContainer=nil;
+(function($rec){smalltalk.send($rec, "_class_", [unescape("input-prepend")]);smalltalk.send($rec, "_style_", [unescape("width%3A%20100%25%3B%20margin-top%3A%2010px%3B%20box-sizing%3A%20border-box%3B%20padding-right%3A%2051px%3B%20margin-bottom%3A%205px%3B")]);return smalltalk.send($rec, "_with_", [(function(){(function($rec){smalltalk.send($rec, "_class_", [unescape("add-on")]);return smalltalk.send($rec, "_with_", ["URL"]);})(smalltalk.send(html, "_span", []));return (self['@inputUrl']=(function($rec){smalltalk.send($rec, "_type_", ["text"]);smalltalk.send($rec, "_style_", [unescape("width%3A%20100%25%3B")]);return smalltalk.send($rec, "_onKeyPress_", [(function(evt){return ((($receiver = smalltalk.send(smalltalk.send(evt, "_which", []), "__eq", [(13)])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(self, "_url_", [smalltalk.send(smalltalk.send(self['@inputUrl'], "_asJQuery", []), "_val", [])]);})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return smalltalk.send(self, "_url_", [smalltalk.send(smalltalk.send(self['@inputUrl'], "_asJQuery", []), "_val", [])]);})]));})]);})(smalltalk.send(html, "_input", [])));})]);})(smalltalk.send(html, "_div", []));
+(iframeContainer=(function($rec){smalltalk.send($rec, "_style_", [unescape("margin-bottom%3A%205px%3B%20margin-right%3A%205px%3B")]);return smalltalk.send($rec, "_with_", [(function(){return (self['@iframe']=(function($rec){smalltalk.send($rec, "_style_", [unescape("width%3A%20100%25%3B%20height%3A%20100%25%3B%20border%3A%201px%20solid%20%23ccc%3B")]);smalltalk.send($rec, "_frameborder_", ["0"]);return smalltalk.send($rec, "_src_", ["about:blank"]);})(smalltalk.send(html, "_iframe", [])));})]);})(smalltalk.send(html, "_div", [])));
+smalltalk.send(smalltalk.send(iframeContainer, "_asJQuery", []), "_resizable", []);
+return self;},
+args: ["html"],
+source: unescape('renderWindowContentOn%3A%20html%0A%09%7CiframeContainer%7C%0A%09html%20div%0A%09%09class%3A%20%27input-prepend%27%3B%0A%09%09style%3A%20%27width%3A%20100%25%3B%20margin-top%3A%2010px%3B%20box-sizing%3A%20border-box%3B%20padding-right%3A%2051px%3B%20margin-bottom%3A%205px%3B%27%3B%0A%09%09with%3A%20%5B%0A%09%09%09html%20span%20%0A%09%09%09%09class%3A%20%27add-on%27%3B%0A%09%09%09%09with%3A%20%27URL%27.%0A%09%09%09inputUrl%20%3A%3D%20html%20input%09%0A%09%09%09%09type%3A%20%27text%27%3B%0A%09%09%09%09style%3A%20%27width%3A%20100%25%3B%27%3B%0A%09%09%09%09onKeyPress%3A%20%5B%3Aevt%20%7C%20evt%20which%20%3D%2013%0A%09%09%09%09%09ifTrue%3A%20%5Bself%20url%3A%20inputUrl%20asJQuery%20val%5D%5D%5D.%0A%09iframeContainer%20%3A%3D%20html%20div%20%0A%09%09style%3A%20%27margin-bottom%3A%205px%3B%20margin-right%3A%205px%3B%27%3B%0A%09%09with%3A%20%5B%0A%09%09%09iframe%20%3A%3D%20html%20iframe%0A%09%09%09%09style%3A%20%27width%3A%20100%25%3B%20height%3A%20100%25%3B%20border%3A%201px%20solid%20%23ccc%3B%27%3B%0A%09%09%09%09frameborder%3A%20%270%27%3B%0A%09%09%09%09src%3A%20%27about%3Ablank%27%5D.%0A%09iframeContainer%20asJQuery%20resizable.'),
+messageSends: ["class:", "style:", "with:", "span", "type:", "onKeyPress:", "ifTrue:", unescape("%3D"), "which", "url:", "val", "asJQuery", "input", "div", "frameborder:", "src:", "iframe", "resizable"],
+referencedClasses: []
+}),
+smalltalk.MaglevWebBrowserWindow);
+
+smalltalk.addMethod(
+unescape('_renderWindowTitleContentOn_'),
+smalltalk.method({
+selector: unescape('renderWindowTitleContentOn%3A'),
+category: 'rendering',
+fn: function (html){
+var self=this;
+smalltalk.send(html, "_with_", [smalltalk.send((smalltalk.MaglevIcon || MaglevIcon), "_globe", [])]);
+smalltalk.send(html, "_with_", ["Web Browser"]);
+smalltalk.send(self, "_renderHeightPlaceholderOn_", [html]);
+smalltalk.send(self, "_renderCloseButtonOn_", [html]);
+return self;},
+args: ["html"],
+source: unescape('renderWindowTitleContentOn%3A%20html%0A%09html%20with%3A%20MaglevIcon%20globe.%0A%09html%20with%3A%20%27Web%20Browser%27.%0A%09self%20renderHeightPlaceholderOn%3A%20html.%0A%09self%20renderCloseButtonOn%3A%20html.'),
+messageSends: ["with:", "globe", "renderHeightPlaceholderOn:", "renderCloseButtonOn:"],
+referencedClasses: ["MaglevIcon"]
+}),
+smalltalk.MaglevWebBrowserWindow);
+
+smalltalk.addMethod(
+unescape('_url'),
+smalltalk.method({
+selector: unescape('url'),
+category: 'accessing',
+fn: function (){
+var self=this;
+return self['@url'];
+return self;},
+args: [],
+source: unescape('url%0A%09%5E%20url'),
+messageSends: [],
+referencedClasses: []
+}),
+smalltalk.MaglevWebBrowserWindow);
+
+smalltalk.addMethod(
+unescape('_url_'),
+smalltalk.method({
+selector: unescape('url%3A'),
+category: 'accessing',
+fn: function (aString){
+var self=this;
+(self['@url']=aString);
+smalltalk.send(smalltalk.send(self['@inputUrl'], "_asJQuery", []), "_attr_with_", ["value", aString]);
+smalltalk.send(smalltalk.send(self['@iframe'], "_asJQuery", []), "_attr_with_", ["src", aString]);
+return self;},
+args: ["aString"],
+source: unescape('url%3A%20aString%0A%09url%20%3A%3D%20aString.%0A%09inputUrl%20asJQuery%20attr%3A%20%27value%27%20with%3A%20aString.%0A%09iframe%20asJQuery%20attr%3A%20%27src%27%20with%3A%20aString.'),
+messageSends: ["attr:with:", "asJQuery"],
+referencedClasses: []
+}),
+smalltalk.MaglevWebBrowserWindow);
+
+
+smalltalk.addMethod(
+unescape('_defaultUrl'),
+smalltalk.method({
+selector: unescape('defaultUrl'),
+category: 'instance creation',
+fn: function (){
+var self=this;
+ var port = parseInt(window.location.host.split(':')[1]) - 1;
+	return window.location.protocol + '//' + window.location.host.split(':')[0] + ':' + port + '/'; ;
+return self;},
+args: [],
+source: unescape('defaultUrl%0A%09%3C%20var%20port%20%3D%20parseInt%28window.location.host.split%28%27%3A%27%29%5B1%5D%29%20-%201%3B%0A%09return%20window.location.protocol%20+%20%27//%27%20+%20window.location.host.split%28%27%3A%27%29%5B0%5D%20+%20%27%3A%27%20+%20port%20+%20%27/%27%3B%20%3E'),
+messageSends: [],
+referencedClasses: []
+}),
+smalltalk.MaglevWebBrowserWindow.klass);
+
+smalltalk.addMethod(
+unescape('_showNew'),
+smalltalk.method({
+selector: unescape('showNew'),
+category: 'instance creation',
+fn: function (){
+var self=this;
+return (function($rec){smalltalk.send($rec, "_appendToWorkspace", []);return smalltalk.send($rec, "_url_", [smalltalk.send(self, "_defaultUrl", [])]);})(smalltalk.send(self, "_new", []));
+return self;},
+args: [],
+source: unescape('showNew%0A%09%5E%20self%20new%0A%09%09appendToWorkspace%3B%0A%09%09url%3A%20self%20defaultUrl.'),
+messageSends: ["appendToWorkspace", "url:", "defaultUrl", "new"],
+referencedClasses: []
+}),
+smalltalk.MaglevWebBrowserWindow.klass);
 
 

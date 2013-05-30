@@ -2367,6 +2367,22 @@ referencedClasses: []
 smalltalk.TagBrush);
 
 smalltalk.addMethod(
+unescape('_frameborder_'),
+smalltalk.method({
+selector: unescape('frameborder%3A'),
+category: 'attributes',
+fn: function (aString){
+var self=this;
+smalltalk.send(self, "_at_put_", ["frameborder", aString]);
+return self;},
+args: ["aString"],
+source: unescape('frameborder%3A%20aString%0A%09self%20at%3A%20%27frameborder%27%20put%3A%20aString'),
+messageSends: ["at:put:"],
+referencedClasses: []
+}),
+smalltalk.TagBrush);
+
+smalltalk.addMethod(
 unescape('_height'),
 smalltalk.method({
 selector: unescape('height'),

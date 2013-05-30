@@ -495,6 +495,12 @@ flag
 		yourself
 !
 
+globe
+	^ self new
+		icon: 'globe';
+		yourself
+!
+
 hdd
 	^ self new
 		icon: 'hdd';
@@ -1916,6 +1922,7 @@ appendToWorkspace
 renderCloseButtonOn: html
 	html span
 		class: 'display-inline-block';
+		style: 'float: right; margin-top: 3px; margin-left: 3px;';
 		with: [html a
 				href: '#';
 				class: 'window-close-button';
@@ -3012,5 +3019,67 @@ renderWindowTitleOn: html
 
 isWaitingWindow
  	^ true
+! !
+
+MaglevWindow subclass: #MaglevWebBrowserWindow
+	instanceVariableNames: 'url inputUrl iframe'
+	package: 'Maglev-Database-Explorer'!
+
+!MaglevWebBrowserWindow methodsFor: 'accessing'!
+
+url
+	^ url
+!
+
+url: aString
+	url := aString.
+	inputUrl asJQuery attr: 'value' with: aString.
+	iframe asJQuery attr: 'src' with: aString.
+! !
+
+!MaglevWebBrowserWindow methodsFor: 'rendering'!
+
+renderWindowContentOn: html
+	|iframeContainer|
+	html div
+		class: 'input-prepend';
+		style: 'width: 100%; margin-top: 10px; box-sizing: border-box; padding-right: 51px; margin-bottom: 5px;';
+		with: [
+			html span 
+				class: 'add-on';
+				with: 'URL'.
+			inputUrl := html input	
+				type: 'text';
+				style: 'width: 100%;';
+				onKeyPress: [:evt | evt which = 13
+					ifTrue: [self url: inputUrl asJQuery val]]].
+	iframeContainer := html div 
+		style: 'margin-bottom: 5px; margin-right: 5px;';
+		with: [
+			iframe := html iframe
+				style: 'width: 100%; height: 100%; border: 1px solid #ccc;';
+				frameborder: '0';
+				src: 'about:blank'].
+	iframeContainer asJQuery resizable.
+!
+
+renderWindowTitleContentOn: html
+	html with: MaglevIcon globe.
+	html with: 'Web Browser'.
+	self renderHeightPlaceholderOn: html.
+	self renderCloseButtonOn: html.
+! !
+
+!MaglevWebBrowserWindow class methodsFor: 'instance creation'!
+
+defaultUrl
+	< var port = parseInt(window.location.host.split(':')[1]) - 1;
+	return window.location.protocol + '//' + window.location.host.split(':')[0] + ':' + port + '/'; >
+!
+
+showNew
+	^ self new
+		appendToWorkspace;
+		url: self defaultUrl.
 ! !
 

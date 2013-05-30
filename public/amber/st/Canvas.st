@@ -624,6 +624,10 @@ for: aString
 	self at: 'for' put: aString
 !
 
+frameborder: aString
+	self at: 'frameborder' put: aString
+!
+
 height
 	^ self asJQuery height
 !

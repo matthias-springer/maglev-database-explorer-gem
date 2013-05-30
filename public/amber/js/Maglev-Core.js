@@ -390,11 +390,12 @@ smalltalk.send(self, "_openWindow_", [smalltalk.send(self, "_persistentRootId", 
 smalltalk.send(self, "_openWindow_", [smalltalk.send(self, "_maglevSystemId", [])]);
 smalltalk.send(smalltalk.send((smalltalk.MaglevObjectSpace || MaglevObjectSpace), "_instance", []), "_evalObject_", [smalltalk.send(smalltalk.send((smalltalk.MaglevObjectSpace || MaglevObjectSpace), "_instance", []), "_reloadObject_", [smalltalk.send(self, "_evalObjectId", [])])]);
 smalltalk.send((smalltalk.MaglevHaltedThreadListener || MaglevHaltedThreadListener), "_start", []);
+smalltalk.send((smalltalk.MaglevWebBrowserWindow || MaglevWebBrowserWindow), "_showNew", []);
 return self;},
 args: [],
-source: unescape('ready%0A%09self%20openWindow%3A%20self%20defaultWorkspaceId.%0A%09self%20openWindow%3A%20self%20persistentRootId.%0A%09self%20openWindow%3A%20self%20maglevSystemId.%0A%09MaglevObjectSpace%20instance%20%0A%09%09evalObject%3A%20%28MaglevObjectSpace%20instance%20reloadObject%3A%20self%20evalObjectId%29.%0A%09MaglevHaltedThreadListener%20start.'),
-messageSends: ["openWindow:", "defaultWorkspaceId", "persistentRootId", "maglevSystemId", "evalObject:", "instance", "reloadObject:", "evalObjectId", "start"],
-referencedClasses: ["MaglevObjectSpace", "MaglevHaltedThreadListener"]
+source: unescape('ready%0A%09self%20openWindow%3A%20self%20defaultWorkspaceId.%0A%09self%20openWindow%3A%20self%20persistentRootId.%0A%09self%20openWindow%3A%20self%20maglevSystemId.%0A%09MaglevObjectSpace%20instance%20%0A%09%09evalObject%3A%20%28MaglevObjectSpace%20instance%20reloadObject%3A%20self%20evalObjectId%29.%0A%09MaglevHaltedThreadListener%20start.%0A%09MaglevWebBrowserWindow%20showNew.'),
+messageSends: ["openWindow:", "defaultWorkspaceId", "persistentRootId", "maglevSystemId", "evalObject:", "instance", "reloadObject:", "evalObjectId", "start", "showNew"],
+referencedClasses: ["MaglevObjectSpace", "MaglevHaltedThreadListener", "MaglevWebBrowserWindow"]
 }),
 smalltalk.Maglev.klass);
 

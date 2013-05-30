@@ -279,6 +279,7 @@ smalltalk.send(self, "_openWindow_", [smalltalk.send(self, "_persistentRootId", 
 smalltalk.send(self, "_openWindow_", [smalltalk.send(self, "_maglevSystemId", [])]);
 smalltalk.send(smalltalk.send((smalltalk.MaglevObjectSpace || MaglevObjectSpace), "_instance", []), "_evalObject_", [smalltalk.send(smalltalk.send((smalltalk.MaglevObjectSpace || MaglevObjectSpace), "_instance", []), "_reloadObject_", [smalltalk.send(self, "_evalObjectId", [])])]);
 smalltalk.send((smalltalk.MaglevHaltedThreadListener || MaglevHaltedThreadListener), "_start", []);
+smalltalk.send((smalltalk.MaglevWebBrowserWindow || MaglevWebBrowserWindow), "_showNew", []);
 return self;}
 }),
 smalltalk.Maglev.klass);

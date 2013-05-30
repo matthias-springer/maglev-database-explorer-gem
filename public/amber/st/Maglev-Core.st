@@ -164,6 +164,7 @@ ready
 	MaglevObjectSpace instance 
 		evalObject: (MaglevObjectSpace instance reloadObject: self evalObjectId).
 	MaglevHaltedThreadListener start.
+	MaglevWebBrowserWindow showNew.
 ! !
 
 !Maglev class methodsFor: 'singleton'!
