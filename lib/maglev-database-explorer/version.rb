@@ -1,0 +1,3 @@
+module MaglevDatabaseExplorer
+  VERSION = "0.0.1"
+end

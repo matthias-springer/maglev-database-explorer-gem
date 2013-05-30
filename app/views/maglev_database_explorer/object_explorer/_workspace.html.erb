@@ -1,0 +1,26 @@
+<div style="position:absolute">
+  <div id="workspace">
+  </div>
+</div>
+
+<div style="display: none;" id="temporary-rendering-area"></div>
+
+<script type='text/javascript'>
+  function bitShiftRight(a, b) {
+    // don't use JS bitshift, this might fail with big numbers
+    return Math.round(a / Math.pow(2, b));
+  }
+
+  loadAmber({
+    ready: function() {
+      smalltalk.Browser._open();
+
+      smalltalk.Maglev._persistentRootId_(<%= Maglev::PERSISTENT_ROOT.object_id %>);
+      smalltalk.Maglev._maglevSystemId_(<%= Maglev::System.object_id %>);
+      smalltalk.Maglev._defaultWorkspaceId_(<%= RubyWorkspace.default_instance.object_id %>),
+
+      smalltalk.Maglev._ready();
+    }
+  });
+</script>
+
