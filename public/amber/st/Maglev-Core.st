@@ -112,7 +112,7 @@ showReloadObjectWindow: oop
 	^ window
 ! !
 
-Maglev class instanceVariableNames: 'instance defaultWorkspaceId persistentRootId maglevSystemId'!
+Maglev class instanceVariableNames: 'instance defaultWorkspaceId persistentRootId maglevSystemId evalObjectId'!
 
 !Maglev class methodsFor: 'accessing'!
 
@@ -123,6 +123,14 @@ defaultWorkspaceId
 defaultWorkspaceId: anInteger
 	"Called from JavaScript initializer."
 	defaultWorkspaceId := anInteger.
+!
+
+evalObjectId
+	^ evalObjectId
+!
+
+evalObjectId: anInteger
+	evalObjectId := anInteger.
 !
 
 maglevSystemId
@@ -153,6 +161,9 @@ ready
 	self openWindow: self defaultWorkspaceId.
 	self openWindow: self persistentRootId.
 	self openWindow: self maglevSystemId.
+	MaglevObjectSpace instance 
+		evalObject: (MaglevObjectSpace instance reloadObject: self evalObjectId).
+	MaglevHaltedThreadListener start.
 ! !
 
 !Maglev class methodsFor: 'singleton'!
@@ -1428,7 +1439,7 @@ windowViewClass
 ! !
 
 MaglevObject subclass: #MaglevThread
-	instanceVariableNames: 'exception localStorage localStorageSize status'
+	instanceVariableNames: 'exception localStorage localStorageSize status isRailsThread'
 	package: 'Maglev-Core'!
 
 !MaglevThread methodsFor: 'accessing'!
@@ -1441,6 +1452,10 @@ inspection
 	self hasException 
 		ifTrue: [^ '#<GsProcess[', exception inspection, ']>']
 		ifFalse: [^ super inspection].
+!
+
+isRailsThread
+	^ isRailsThread = true
 !
 
 localStorage
@@ -1465,6 +1480,7 @@ parseJSON: obj
 	localStorage := MaglevObject newObject: obj threadLocalStorage.
 	localStorageSize := obj threadLocalStorageSize.
 	status := obj status.
+	isRailsThread := obj isRailsThread.
 ! !
 
 !MaglevThread methodsFor: 'interactions'!
@@ -1549,8 +1565,18 @@ windowViewClass
 ! !
 
 Object subclass: #MaglevObjectSpace
-	instanceVariableNames: 'objects'
+	instanceVariableNames: 'objects evalObject'
 	package: 'Maglev-Core'!
+
+!MaglevObjectSpace methodsFor: 'accessing'!
+
+evalObject
+	^ evalObject
+!
+
+evalObject: anObject
+	evalObject := anObject.
+! !
 
 !MaglevObjectSpace methodsFor: 'initializing'!
 

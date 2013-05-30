@@ -156,7 +156,7 @@ return self;}
 smalltalk.Maglev);
 
 
-smalltalk.Maglev.klass.iVarNames = ['instance','defaultWorkspaceId','persistentRootId','maglevSystemId'];
+smalltalk.Maglev.klass.iVarNames = ['instance','defaultWorkspaceId','persistentRootId','maglevSystemId','evalObjectId'];
 smalltalk.addMethod(
 unescape('_defaultWorkspaceId'),
 smalltalk.method({
@@ -175,6 +175,28 @@ selector: unescape('defaultWorkspaceId%3A'),
 fn: function (anInteger){
 var self=this;
 (self['@defaultWorkspaceId']=anInteger);
+return self;}
+}),
+smalltalk.Maglev.klass);
+
+smalltalk.addMethod(
+unescape('_evalObjectId'),
+smalltalk.method({
+selector: unescape('evalObjectId'),
+fn: function (){
+var self=this;
+return self['@evalObjectId'];
+return self;}
+}),
+smalltalk.Maglev.klass);
+
+smalltalk.addMethod(
+unescape('_evalObjectId_'),
+smalltalk.method({
+selector: unescape('evalObjectId%3A'),
+fn: function (anInteger){
+var self=this;
+(self['@evalObjectId']=anInteger);
 return self;}
 }),
 smalltalk.Maglev.klass);
@@ -255,6 +277,8 @@ var self=this;
 smalltalk.send(self, "_openWindow_", [smalltalk.send(self, "_defaultWorkspaceId", [])]);
 smalltalk.send(self, "_openWindow_", [smalltalk.send(self, "_persistentRootId", [])]);
 smalltalk.send(self, "_openWindow_", [smalltalk.send(self, "_maglevSystemId", [])]);
+smalltalk.send(smalltalk.send((smalltalk.MaglevObjectSpace || MaglevObjectSpace), "_instance", []), "_evalObject_", [smalltalk.send(smalltalk.send((smalltalk.MaglevObjectSpace || MaglevObjectSpace), "_instance", []), "_reloadObject_", [smalltalk.send(self, "_evalObjectId", [])])]);
+smalltalk.send((smalltalk.MaglevHaltedThreadListener || MaglevHaltedThreadListener), "_start", []);
 return self;}
 }),
 smalltalk.Maglev.klass);
@@ -2571,7 +2595,7 @@ return self;}
 smalltalk.MaglevSymbol.klass);
 
 
-smalltalk.addClass('MaglevThread', smalltalk.MaglevObject, ['exception', 'localStorage', 'localStorageSize', 'status'], 'Maglev-Core');
+smalltalk.addClass('MaglevThread', smalltalk.MaglevObject, ['exception', 'localStorage', 'localStorageSize', 'status', 'isRailsThread'], 'Maglev-Core');
 smalltalk.addMethod(
 unescape('_exception'),
 smalltalk.method({
@@ -2605,6 +2629,17 @@ var self=this;
 try{((($receiver = smalltalk.send(self, "_hasException", [])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return (function(){throw({name: 'stReturn', selector: '_inspection', fn: function(){return smalltalk.send(smalltalk.send(unescape("%23%3CGsProcess%5B"), "__comma", [smalltalk.send(self['@exception'], "_inspection", [])]), "__comma", [unescape("%5D%3E")])}})})();})() : (function(){return (function(){throw({name: 'stReturn', selector: '_inspection', fn: function(){return smalltalk.send(self, "_inspection", [], smalltalk.MaglevObject)}})})();})()) : smalltalk.send($receiver, "_ifTrue_ifFalse_", [(function(){return (function(){throw({name: 'stReturn', selector: '_inspection', fn: function(){return smalltalk.send(smalltalk.send(unescape("%23%3CGsProcess%5B"), "__comma", [smalltalk.send(self['@exception'], "_inspection", [])]), "__comma", [unescape("%5D%3E")])}})})();}), (function(){return (function(){throw({name: 'stReturn', selector: '_inspection', fn: function(){return smalltalk.send(self, "_inspection", [], smalltalk.MaglevObject)}})})();})]));
 return self;
 } catch(e) {if(e.name === 'stReturn' && e.selector === '_inspection'){return e.fn()} throw(e)}}
+}),
+smalltalk.MaglevThread);
+
+smalltalk.addMethod(
+unescape('_isRailsThread'),
+smalltalk.method({
+selector: unescape('isRailsThread'),
+fn: function (){
+var self=this;
+return smalltalk.send(self['@isRailsThread'], "__eq", [true]);
+return self;}
 }),
 smalltalk.MaglevThread);
 
@@ -2643,6 +2678,7 @@ smalltalk.send(self, "_parseJSON_", [obj], smalltalk.MaglevObject);
 (self['@localStorage']=smalltalk.send((smalltalk.MaglevObject || MaglevObject), "_newObject_", [smalltalk.send(obj, "_threadLocalStorage", [])]));
 (self['@localStorageSize']=smalltalk.send(obj, "_threadLocalStorageSize", []));
 (self['@status']=smalltalk.send(obj, "_status", []));
+(self['@isRailsThread']=smalltalk.send(obj, "_isRailsThread", []));
 return self;}
 }),
 smalltalk.MaglevThread);
@@ -2767,7 +2803,7 @@ return self;}
 smalltalk.MaglevThread.klass);
 
 
-smalltalk.addClass('MaglevObjectSpace', smalltalk.Object, ['objects'], 'Maglev-Core');
+smalltalk.addClass('MaglevObjectSpace', smalltalk.Object, ['objects', 'evalObject'], 'Maglev-Core');
 smalltalk.addMethod(
 unescape('_at_'),
 smalltalk.method({
@@ -2786,6 +2822,28 @@ selector: unescape('at%3AwithCallback%3A'),
 fn: function (anOop, aBlock){
 var self=this;
 ((($receiver = smalltalk.send(self['@objects'], "_includesKey_", [anOop])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(aBlock, "_value_", [smalltalk.send(self['@objects'], "_at_", [anOop])]);})() : (function(){return smalltalk.send(self, "_reloadObject_withCallback_", [anOop, aBlock]);})()) : smalltalk.send($receiver, "_ifTrue_ifFalse_", [(function(){return smalltalk.send(aBlock, "_value_", [smalltalk.send(self['@objects'], "_at_", [anOop])]);}), (function(){return smalltalk.send(self, "_reloadObject_withCallback_", [anOop, aBlock]);})]));
+return self;}
+}),
+smalltalk.MaglevObjectSpace);
+
+smalltalk.addMethod(
+unescape('_evalObject'),
+smalltalk.method({
+selector: unescape('evalObject'),
+fn: function (){
+var self=this;
+return self['@evalObject'];
+return self;}
+}),
+smalltalk.MaglevObjectSpace);
+
+smalltalk.addMethod(
+unescape('_evalObject_'),
+smalltalk.method({
+selector: unescape('evalObject%3A'),
+fn: function (anObject){
+var self=this;
+(self['@evalObject']=anObject);
 return self;}
 }),
 smalltalk.MaglevObjectSpace);

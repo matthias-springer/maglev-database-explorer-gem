@@ -200,3 +200,10 @@ ol.ui-selectable {
 ._jsPlumb_endpoint { z-index:5; }
 ._jsPlumb_overlay { z-index:6; }
 
+.stackable-navbar {
+  border-top: 1px #a466c2 solid;
+}
+
+#halted-threads-navigation {
+  padding-top: 4px;
+}

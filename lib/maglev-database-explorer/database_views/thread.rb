@@ -10,6 +10,7 @@ class Thread
       obj[:exception] = __exception.to_database_view(depth - 1, {}, {}) 
       obj[:threadLocalStorage] = __environment.to_database_view(1, {}, {})
       obj[:threadLocalStorageSize] = __environment ? __environment.size : -1
+      obj[:isRailsThread] = self[:is_rails_thread] ? true : false
       obj[:status] = self.status.to_s
     end
 

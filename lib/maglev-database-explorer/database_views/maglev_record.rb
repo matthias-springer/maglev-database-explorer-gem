@@ -1,4 +1,6 @@
 if Object.const_defined?(:MaglevRecord)
+  puts "MaglevRecord is present."
+
   module MaglevRecord::Base
     def __basetype
       :maglevRecordBase

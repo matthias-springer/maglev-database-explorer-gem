@@ -624,6 +624,184 @@ smalltalk.MaglevGsNMethodDebugEditor);
 
 
 
+smalltalk.addClass('MaglevHaltedThreadListener', smalltalk.Object, ['container', 'interval', 'timer', 'renderedOops', 'html', 'navbar'], 'Maglev-Database-Explorer');
+smalltalk.addMethod(
+unescape('_initialize'),
+smalltalk.method({
+selector: unescape('initialize'),
+category: 'initializing',
+fn: function (){
+var self=this;
+(self['@container']=smalltalk.send(unescape("%23halted-threads-navigation"), "_asJQuery", []));
+(self['@navbar']=smalltalk.send(unescape("%23halted-threads-navbar"), "_asJQuery", []));
+smalltalk.send(self['@navbar'], "_hide", []);
+(self['@html']=smalltalk.send((smalltalk.HTMLCanvas || HTMLCanvas), "_onJQuery_", [self['@container']]));
+(self['@renderedOops']=smalltalk.send((smalltalk.Dictionary || Dictionary), "_new", []));
+return self;},
+args: [],
+source: unescape('initialize%0A%09container%20%3A%3D%20%27%23halted-threads-navigation%27%20asJQuery.%0A%09navbar%20%3A%3D%20%27%23halted-threads-navbar%27%20asJQuery.%0A%09navbar%20hide.%0A%09html%20%3A%3D%20HTMLCanvas%20onJQuery%3A%20container.%0A%09renderedOops%20%3A%3D%20Dictionary%20new.'),
+messageSends: ["asJQuery", "hide", "onJQuery:", "new"],
+referencedClasses: ["HTMLCanvas", "Dictionary"]
+}),
+smalltalk.MaglevHaltedThreadListener);
+
+smalltalk.addMethod(
+unescape('_interval'),
+smalltalk.method({
+selector: unescape('interval'),
+category: 'accessing',
+fn: function (){
+var self=this;
+(($receiver = self['@interval']) == nil || $receiver == undefined) ? (function(){return (self['@interval']=(2500));})() : $receiver;
+return self['@interval'];
+return self;},
+args: [],
+source: unescape('interval%0A%09interval%20ifNil%3A%20%5Binterval%20%3A%3D%202500%5D.%0A%09%5E%20interval'),
+messageSends: ["ifNil:"],
+referencedClasses: []
+}),
+smalltalk.MaglevHaltedThreadListener);
+
+smalltalk.addMethod(
+unescape('_interval_'),
+smalltalk.method({
+selector: unescape('interval%3A'),
+category: 'accessing',
+fn: function (aNumber){
+var self=this;
+(self['@interval']=aNumber);
+ clearInterval(self['@timer']); ;
+smalltalk.send(self, "_startPolling", []);
+return self;},
+args: ["aNumber"],
+source: unescape('interval%3A%20aNumber%0A%09interval%20%3A%3D%20aNumber.%0A%09%3C%20clearInterval%28self%5B%27@timer%27%5D%29%3B%20%3E.%0A%09self%20startPolling.'),
+messageSends: ["startPolling"],
+referencedClasses: []
+}),
+smalltalk.MaglevHaltedThreadListener);
+
+smalltalk.addMethod(
+unescape('_refresh'),
+smalltalk.method({
+selector: unescape('refresh'),
+category: 'polling',
+fn: function (){
+var self=this;
+var params=nil;
+(params=(function($rec){smalltalk.send($rec, "_at_put_", ["allElements", true]);smalltalk.send($rec, "_at_put_", ["noBehavior", true]);return smalltalk.send($rec, "_yourself", []);})(smalltalk.send((smalltalk.Dictionary || Dictionary), "_new", [])));
+smalltalk.send(smalltalk.send(smalltalk.send((smalltalk.MaglevObjectSpace || MaglevObjectSpace), "_instance", []), "_evalObject", []), "_evaluateWithoutUpdate_language_with_withCallback_", ["MaglevDatabaseExplorer.halted_threads", "ruby", params, (function(success, obj){var currentOops=nil;
+return ((($receiver = success).klass === smalltalk.Boolean) ? ($receiver ? (function(){(currentOops=smalltalk.send((smalltalk.Set || Set), "_new", []));smalltalk.send(obj, "_do_", [(function(el){((($receiver = smalltalk.send(self['@renderedOops'], "_includesKey_", [smalltalk.send(el, "_oop", [])])).klass === smalltalk.Boolean) ? (! $receiver ? (function(){return smalltalk.send(self, "_renderObject_with_", [smalltalk.send(el, "_oop", []), smalltalk.send(el, "_inlineViewComponent", [])]);})() : nil) : smalltalk.send($receiver, "_ifFalse_", [(function(){return smalltalk.send(self, "_renderObject_with_", [smalltalk.send(el, "_oop", []), smalltalk.send(el, "_inlineViewComponent", [])]);})]));return smalltalk.send(currentOops, "_add_", [smalltalk.send(el, "_oop", [])]);})]);smalltalk.send(self['@renderedOops'], "_keysAndValuesDo_", [(function(oop, comp){return ((($receiver = smalltalk.send(currentOops, "_includes_", [oop])).klass === smalltalk.Boolean) ? (! $receiver ? (function(){return smalltalk.send(self, "_removeObject_with_", [oop, comp]);})() : nil) : smalltalk.send($receiver, "_ifFalse_", [(function(){return smalltalk.send(self, "_removeObject_with_", [oop, comp]);})]));})]);return ((($receiver = smalltalk.send(smalltalk.send(self['@renderedOops'], "_size", []), "__eq", [(0)])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(self['@navbar'], "_hide", []);})() : (function(){return smalltalk.send(self['@navbar'], "_show", []);})()) : smalltalk.send($receiver, "_ifTrue_ifFalse_", [(function(){return smalltalk.send(self['@navbar'], "_hide", []);}), (function(){return smalltalk.send(self['@navbar'], "_show", []);})]));})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){(currentOops=smalltalk.send((smalltalk.Set || Set), "_new", []));smalltalk.send(obj, "_do_", [(function(el){((($receiver = smalltalk.send(self['@renderedOops'], "_includesKey_", [smalltalk.send(el, "_oop", [])])).klass === smalltalk.Boolean) ? (! $receiver ? (function(){return smalltalk.send(self, "_renderObject_with_", [smalltalk.send(el, "_oop", []), smalltalk.send(el, "_inlineViewComponent", [])]);})() : nil) : smalltalk.send($receiver, "_ifFalse_", [(function(){return smalltalk.send(self, "_renderObject_with_", [smalltalk.send(el, "_oop", []), smalltalk.send(el, "_inlineViewComponent", [])]);})]));return smalltalk.send(currentOops, "_add_", [smalltalk.send(el, "_oop", [])]);})]);smalltalk.send(self['@renderedOops'], "_keysAndValuesDo_", [(function(oop, comp){return ((($receiver = smalltalk.send(currentOops, "_includes_", [oop])).klass === smalltalk.Boolean) ? (! $receiver ? (function(){return smalltalk.send(self, "_removeObject_with_", [oop, comp]);})() : nil) : smalltalk.send($receiver, "_ifFalse_", [(function(){return smalltalk.send(self, "_removeObject_with_", [oop, comp]);})]));})]);return ((($receiver = smalltalk.send(smalltalk.send(self['@renderedOops'], "_size", []), "__eq", [(0)])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(self['@navbar'], "_hide", []);})() : (function(){return smalltalk.send(self['@navbar'], "_show", []);})()) : smalltalk.send($receiver, "_ifTrue_ifFalse_", [(function(){return smalltalk.send(self['@navbar'], "_hide", []);}), (function(){return smalltalk.send(self['@navbar'], "_show", []);})]));})]));})]);
+return self;},
+args: [],
+source: unescape('refresh%0A%09%7Cparams%7C%0A%09params%20%3A%3D%20Dictionary%20new%0A%09%09at%3A%20%27allElements%27%20put%3A%20true%3B%0A%09%09at%3A%20%27noBehavior%27%20put%3A%20true%3B%0A%09%09yourself.%0A%09MaglevObjectSpace%20instance%20evalObject%20%0A%09%09evaluateWithoutUpdate%3A%20%27MaglevDatabaseExplorer.halted_threads%27%20%0A%09%09language%3A%20%27ruby%27%0A%09%09with%3A%20params%20%0A%09%09withCallback%3A%20%5B%3Asuccess%20%3Aobj%20%7C%20%7CcurrentOops%7C%0A%09%09%09success%20ifTrue%3A%5B%0A%09%09%09currentOops%20%3A%3D%20Set%20new.%0A%09%09%09obj%20do%3A%20%5B%3Ael%20%7C%20%0A%09%09%09%09%28renderedOops%20includesKey%3A%20el%20oop%29%0A%09%09%09%09%09ifFalse%3A%20%5Bself%20renderObject%3A%20el%20oop%20with%3A%20el%20inlineViewComponent%5D.%0A%09%09%09%09currentOops%20add%3A%20el%20oop%5D.%0A%09%09%09renderedOops%20keysAndValuesDo%3A%20%5B%3Aoop%20%3Acomp%20%7C%0A%09%09%09%09%28currentOops%20includes%3A%20oop%29%0A%09%09%09%09%09ifFalse%3A%20%5Bself%20removeObject%3A%20oop%20with%3A%20comp%5D%5D.%0A%09%09%09renderedOops%20size%20%3D%200%0A%09%09%09%09ifTrue%3A%20%5Bnavbar%20hide%5D%0A%09%09%09%09ifFalse%3A%20%5Bnavbar%20show%5D%5D%5D.'),
+messageSends: ["at:put:", "yourself", "new", "evaluateWithoutUpdate:language:with:withCallback:", "evalObject", "instance", "ifTrue:", "do:", "ifFalse:", "includesKey:", "oop", "renderObject:with:", "inlineViewComponent", "add:", "keysAndValuesDo:", "includes:", "removeObject:with:", "ifTrue:ifFalse:", unescape("%3D"), "size", "hide", "show"],
+referencedClasses: ["Dictionary", "MaglevObjectSpace", "Set"]
+}),
+smalltalk.MaglevHaltedThreadListener);
+
+smalltalk.addMethod(
+unescape('_removeObject_with_'),
+smalltalk.method({
+selector: unescape('removeObject%3Awith%3A'),
+category: 'polling',
+fn: function (oop, component){
+var self=this;
+smalltalk.send(smalltalk.send(component, "_asJQuery", []), "_remove", []);
+smalltalk.send(self['@renderedOops'], "_removeKey_", [oop]);
+return self;},
+args: ["oop", "component"],
+source: unescape('removeObject%3A%20oop%20with%3A%20component%0A%09component%20asJQuery%20remove.%0A%09renderedOops%20removeKey%3A%20oop.'),
+messageSends: ["remove", "asJQuery", "removeKey:"],
+referencedClasses: []
+}),
+smalltalk.MaglevHaltedThreadListener);
+
+smalltalk.addMethod(
+unescape('_renderObject_with_'),
+smalltalk.method({
+selector: unescape('renderObject%3Awith%3A'),
+category: 'polling',
+fn: function (oop, component){
+var self=this;
+var inlineContainer=nil;
+(inlineContainer=(function($rec){smalltalk.send($rec, "_style_", [unescape("padding%3A%204px%202px%202px%204px%3B")]);return smalltalk.send($rec, "_with_", [component]);})(smalltalk.send(self['@html'], "_span", [])));
+smalltalk.send(self['@renderedOops'], "_at_put_", [oop, inlineContainer]);
+return self;},
+args: ["oop", "component"],
+source: unescape('renderObject%3A%20oop%20with%3A%20component%0A%09%7CinlineContainer%7C%0A%09inlineContainer%20%3A%3D%20html%20span%20%0A%09%09style%3A%20%27padding%3A%204px%202px%202px%204px%3B%27%3B%0A%09%09with%3A%20component.%0A%09renderedOops%20at%3A%20oop%20put%3A%20inlineContainer.'),
+messageSends: ["style:", "with:", "span", "at:put:"],
+referencedClasses: []
+}),
+smalltalk.MaglevHaltedThreadListener);
+
+smalltalk.addMethod(
+unescape('_start'),
+smalltalk.method({
+selector: unescape('start'),
+category: 'initializing',
+fn: function (){
+var self=this;
+(self['@timer']=smalltalk.send(self, "_startPolling", []));
+return self;},
+args: [],
+source: unescape('start%0A%09timer%20%3A%3D%20self%20startPolling.'),
+messageSends: ["startPolling"],
+referencedClasses: []
+}),
+smalltalk.MaglevHaltedThreadListener);
+
+smalltalk.addMethod(
+unescape('_startPolling'),
+smalltalk.method({
+selector: unescape('startPolling'),
+category: 'initializing',
+fn: function (){
+var self=this;
+ return setInterval(function() {self._refresh();}, self._interval()); ;
+return self;},
+args: [],
+source: unescape('startPolling%0A%09%3C%20return%20setInterval%28function%28%29%20%7Bself._refresh%28%29%3B%7D%2C%20self._interval%28%29%29%3B%20%3E%20'),
+messageSends: [],
+referencedClasses: []
+}),
+smalltalk.MaglevHaltedThreadListener);
+
+
+smalltalk.MaglevHaltedThreadListener.klass.iVarNames = ['instance'];
+smalltalk.addMethod(
+unescape('_instance'),
+smalltalk.method({
+selector: unescape('instance'),
+category: 'instance creation',
+fn: function (){
+var self=this;
+(($receiver = self['@instance']) == nil || $receiver == undefined) ? (function(){return (self['@instance']=smalltalk.send(self, "_new", []));})() : $receiver;
+return self['@instance'];
+return self;},
+args: [],
+source: unescape('instance%0A%09instance%20ifNil%3A%20%5Binstance%20%3A%3D%20self%20new%5D.%0A%09%5E%20instance'),
+messageSends: ["ifNil:", "new"],
+referencedClasses: []
+}),
+smalltalk.MaglevHaltedThreadListener.klass);
+
+smalltalk.addMethod(
+unescape('_start'),
+smalltalk.method({
+selector: unescape('start'),
+category: 'instance creation',
+fn: function (){
+var self=this;
+smalltalk.send(smalltalk.send(self, "_instance", []), "_start", []);
+return self;},
+args: [],
+source: unescape('start%0A%09self%20instance%20start.'),
+messageSends: ["start", "instance"],
+referencedClasses: []
+}),
+smalltalk.MaglevHaltedThreadListener.klass);
+
+
 smalltalk.addClass('MaglevIcon', smalltalk.Widget, ['b', 'icon', 'spin', 'caption'], 'Maglev-Database-Explorer');
 smalltalk.addMethod(
 unescape('_caption'),
@@ -1165,6 +1343,22 @@ referencedClasses: []
 }),
 smalltalk.MaglevIconImage);
 
+
+smalltalk.addMethod(
+unescape('_rails'),
+smalltalk.method({
+selector: unescape('rails'),
+category: 'instance creation',
+fn: function (){
+var self=this;
+return (function($rec){smalltalk.send($rec, "_src_", [unescape("images/rails_tiny.png")]);return smalltalk.send($rec, "_yourself", []);})(smalltalk.send(self, "_new", []));
+return self;},
+args: [],
+source: unescape('rails%0A%09%5E%20self%20new%0A%09%09src%3A%20%27images/rails_tiny.png%27%3B%0A%09%09yourself'),
+messageSends: ["src:", "yourself", "new"],
+referencedClasses: []
+}),
+smalltalk.MaglevIconImage.klass);
 
 smalltalk.addMethod(
 unescape('_ruby'),
@@ -3063,15 +3257,16 @@ selector: unescape('renderObjectActionsOn%3A'),
 category: 'constants',
 fn: function (html){
 var self=this;
+((($receiver = smalltalk.send(self['@object'], "_isRailsThread", [])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(html, "_with_", [smalltalk.send((smalltalk.MaglevIconImage || MaglevIconImage), "_rails", [])]);})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return smalltalk.send(html, "_with_", [smalltalk.send((smalltalk.MaglevIconImage || MaglevIconImage), "_rails", [])]);})]));
 ((($receiver = smalltalk.send(smalltalk.send(self['@object'], "_status", []), "__eq", ["sleep"])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(html, "_with_", [smalltalk.send(smalltalk.send((smalltalk.MaglevIcon || MaglevIcon), "_pause", []), "_caption_", ["Thread status: sleeping"])]);})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return smalltalk.send(html, "_with_", [smalltalk.send(smalltalk.send((smalltalk.MaglevIcon || MaglevIcon), "_pause", []), "_caption_", ["Thread status: sleeping"])]);})]));
 ((($receiver = smalltalk.send(smalltalk.send(self['@object'], "_status", []), "__eq", ["false"])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(html, "_with_", [smalltalk.send(smalltalk.send((smalltalk.MaglevIcon || MaglevIcon), "_stop", []), "_caption_", [unescape("Thread%20status%3A%20stopped%20%28false%29")])]);})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return smalltalk.send(html, "_with_", [smalltalk.send(smalltalk.send((smalltalk.MaglevIcon || MaglevIcon), "_stop", []), "_caption_", [unescape("Thread%20status%3A%20stopped%20%28false%29")])]);})]));
 ((($receiver = smalltalk.send(smalltalk.send(self['@object'], "_status", []), "__eq", ["run"])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(html, "_with_", [smalltalk.send(smalltalk.send((smalltalk.MaglevIcon || MaglevIcon), "_play", []), "_caption_", ["Thread status: running"])]);})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return smalltalk.send(html, "_with_", [smalltalk.send(smalltalk.send((smalltalk.MaglevIcon || MaglevIcon), "_play", []), "_caption_", ["Thread status: running"])]);})]));
 ((($receiver = smalltalk.send(smalltalk.send(self['@object'], "_status", []), "__eq", ["aborting"])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(html, "_with_", [smalltalk.send(smalltalk.send((smalltalk.MaglevIcon || MaglevIcon), "_trash", []), "_caption_", ["Thread status: aborting"])]);})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return smalltalk.send(html, "_with_", [smalltalk.send(smalltalk.send((smalltalk.MaglevIcon || MaglevIcon), "_trash", []), "_caption_", ["Thread status: aborting"])]);})]));
 return self;},
 args: ["html"],
-source: unescape('renderObjectActionsOn%3A%20html%0A%09object%20status%20%3D%20%27sleep%27%0A%09%09ifTrue%3A%20%5Bhtml%20with%3A%20%28MaglevIcon%20pause%0A%09%09%09caption%3A%20%27Thread%20status%3A%20sleeping%27%29%5D.%0A%09object%20status%20%3D%20%27false%27%0A%09%09ifTrue%3A%20%5Bhtml%20with%3A%20%28MaglevIcon%20stop%0A%09%09%09caption%3A%20%27Thread%20status%3A%20stopped%20%28false%29%27%29%5D.%0A%09object%20status%20%3D%20%27run%27%0A%09%09ifTrue%3A%20%5Bhtml%20with%3A%20%28MaglevIcon%20play%0A%09%09%09caption%3A%20%27Thread%20status%3A%20running%27%29%5D.%0A%09object%20status%20%3D%20%27aborting%27%0A%09%09ifTrue%3A%20%5Bhtml%20with%3A%20%28MaglevIcon%20trash%0A%09%09%09caption%3A%20%27Thread%20status%3A%20aborting%27%29%5D.'),
-messageSends: ["ifTrue:", unescape("%3D"), "status", "with:", "caption:", "pause", "stop", "play", "trash"],
-referencedClasses: ["MaglevIcon"]
+source: unescape('renderObjectActionsOn%3A%20html%0A%09object%20isRailsThread%0A%09%09ifTrue%3A%20%5Bhtml%20with%3A%20MaglevIconImage%20rails%5D.%0A%09object%20status%20%3D%20%27sleep%27%0A%09%09ifTrue%3A%20%5Bhtml%20with%3A%20%28MaglevIcon%20pause%0A%09%09%09caption%3A%20%27Thread%20status%3A%20sleeping%27%29%5D.%0A%09object%20status%20%3D%20%27false%27%0A%09%09ifTrue%3A%20%5Bhtml%20with%3A%20%28MaglevIcon%20stop%0A%09%09%09caption%3A%20%27Thread%20status%3A%20stopped%20%28false%29%27%29%5D.%0A%09object%20status%20%3D%20%27run%27%0A%09%09ifTrue%3A%20%5Bhtml%20with%3A%20%28MaglevIcon%20play%0A%09%09%09caption%3A%20%27Thread%20status%3A%20running%27%29%5D.%0A%09object%20status%20%3D%20%27aborting%27%0A%09%09ifTrue%3A%20%5Bhtml%20with%3A%20%28MaglevIcon%20trash%0A%09%09%09caption%3A%20%27Thread%20status%3A%20aborting%27%29%5D.'),
+messageSends: ["ifTrue:", "isRailsThread", "with:", "rails", unescape("%3D"), "status", "caption:", "pause", "stop", "play", "trash"],
+referencedClasses: ["MaglevIconImage", "MaglevIcon"]
 }),
 smalltalk.MaglevThreadInline);
 
@@ -5474,11 +5669,11 @@ selector: unescape('proceed'),
 category: 'interactions',
 fn: function (){
 var self=this;
-smalltalk.send(self['@object'], "_proceedWithCallback_", [(function(obj){return smalltalk.send(self['@object'], "_fullReloadWithCallback_", [(function(threadReloaded){return smalltalk.send(smalltalk.send(threadReloaded, "_windowViewComponentReplace_", [self]), "_renderReplace", []);})]);})]);
+smalltalk.send(self['@object'], "_proceedWithCallback_", [(function(obj){return smalltalk.send(self['@object'], "_fullReloadWithCallback_", [(function(threadReloaded){return ((($receiver = smalltalk.send(self['@object'], "_isRailsThread", [])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(self, "_closeWindow", []);})() : (function(){return smalltalk.send(smalltalk.send(threadReloaded, "_windowViewComponentReplace_", [self]), "_renderReplace", []);})()) : smalltalk.send($receiver, "_ifTrue_ifFalse_", [(function(){return smalltalk.send(self, "_closeWindow", []);}), (function(){return smalltalk.send(smalltalk.send(threadReloaded, "_windowViewComponentReplace_", [self]), "_renderReplace", []);})]));})]);})]);
 return self;},
 args: [],
-source: unescape('proceed%0A%09object%20%0A%09%09proceedWithCallback%3A%20%5B%3Aobj%20%7C%20%0A%09%09%09object%20fullReloadWithCallback%3A%20%5B%3AthreadReloaded%20%7C%0A%09%09%09%09%28threadReloaded%20windowViewComponentReplace%3A%20self%29%20renderReplace%5D%5D.'),
-messageSends: ["proceedWithCallback:", "fullReloadWithCallback:", "renderReplace", "windowViewComponentReplace:"],
+source: unescape('proceed%0A%09object%20%0A%09%09proceedWithCallback%3A%20%5B%3Aobj%20%7C%20%0A%09%09%09object%20fullReloadWithCallback%3A%20%5B%3AthreadReloaded%20%7C%0A%09%09%09%09object%20isRailsThread%0A%09%09%09%09%09ifTrue%3A%20%5Bself%20closeWindow%5D%0A%09%09%09%09%09ifFalse%3A%20%5B%28threadReloaded%20windowViewComponentReplace%3A%20self%29%20renderReplace%5D%5D%5D.'),
+messageSends: ["proceedWithCallback:", "fullReloadWithCallback:", "ifTrue:ifFalse:", "isRailsThread", "closeWindow", "renderReplace", "windowViewComponentReplace:"],
 referencedClasses: []
 }),
 smalltalk.MaglevThreadWindow);

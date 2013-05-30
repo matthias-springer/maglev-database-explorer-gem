@@ -11,5 +11,9 @@ module MaglevDatabaseExplorer
     gem = Gem.loaded_specs["maglev-database-explorer"]
     gem.full_gem_path
   end
+
+  def self.eval_object
+    @eval_object ||= Object.new
+  end
 end
 

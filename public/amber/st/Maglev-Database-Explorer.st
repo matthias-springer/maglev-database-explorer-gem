@@ -327,6 +327,94 @@ renderOn: html
 	self renderMethodObject.
 ! !
 
+Object subclass: #MaglevHaltedThreadListener
+	instanceVariableNames: 'container interval timer renderedOops html navbar'
+	package: 'Maglev-Database-Explorer'!
+
+!MaglevHaltedThreadListener methodsFor: 'accessing'!
+
+interval
+	interval ifNil: [interval := 2500].
+	^ interval
+!
+
+interval: aNumber
+	interval := aNumber.
+	< clearInterval(self['@timer']); >.
+	self startPolling.
+! !
+
+!MaglevHaltedThreadListener methodsFor: 'initializing'!
+
+initialize
+	container := '#halted-threads-navigation' asJQuery.
+	navbar := '#halted-threads-navbar' asJQuery.
+	navbar hide.
+	html := HTMLCanvas onJQuery: container.
+	renderedOops := Dictionary new.
+!
+
+start
+	timer := self startPolling.
+!
+
+startPolling
+	< return setInterval(function() {self._refresh();}, self._interval()); >
+! !
+
+!MaglevHaltedThreadListener methodsFor: 'polling'!
+
+refresh
+	|params|
+	params := Dictionary new
+		at: 'allElements' put: true;
+		at: 'noBehavior' put: true;
+		yourself.
+	MaglevObjectSpace instance evalObject 
+		evaluateWithoutUpdate: 'MaglevDatabaseExplorer.halted_threads' 
+		language: 'ruby'
+		with: params 
+		withCallback: [:success :obj | |currentOops|
+			success ifTrue:[
+			currentOops := Set new.
+			obj do: [:el | 
+				(renderedOops includesKey: el oop)
+					ifFalse: [self renderObject: el oop with: el inlineViewComponent].
+				currentOops add: el oop].
+			renderedOops keysAndValuesDo: [:oop :comp |
+				(currentOops includes: oop)
+					ifFalse: [self removeObject: oop with: comp]].
+			renderedOops size = 0
+				ifTrue: [navbar hide]
+				ifFalse: [navbar show]]].
+!
+
+removeObject: oop with: component
+	component asJQuery remove.
+	renderedOops removeKey: oop.
+!
+
+renderObject: oop with: component
+	|inlineContainer|
+	inlineContainer := html span 
+		style: 'padding: 4px 2px 2px 4px;';
+		with: component.
+	renderedOops at: oop put: inlineContainer.
+! !
+
+MaglevHaltedThreadListener class instanceVariableNames: 'instance'!
+
+!MaglevHaltedThreadListener class methodsFor: 'instance creation'!
+
+instance
+	instance ifNil: [instance := self new].
+	^ instance
+!
+
+start
+	self instance start.
+! !
+
 Widget subclass: #MaglevIcon
 	instanceVariableNames: 'b icon spin caption'
 	package: 'Maglev-Database-Explorer'!
@@ -540,6 +628,12 @@ renderOn: html
 ! !
 
 !MaglevIconImage class methodsFor: 'instance creation'!
+
+rails
+	^ self new
+		src: 'images/rails_tiny.png';
+		yourself
+!
 
 ruby
 	^ self new
@@ -1436,6 +1530,8 @@ maxInspection
 !
 
 renderObjectActionsOn: html
+	object isRailsThread
+		ifTrue: [html with: MaglevIconImage rails].
 	object status = 'sleep'
 		ifTrue: [html with: (MaglevIcon pause
 			caption: 'Thread status: sleeping')].
@@ -2657,7 +2753,9 @@ proceed
 	object 
 		proceedWithCallback: [:obj | 
 			object fullReloadWithCallback: [:threadReloaded |
-				(threadReloaded windowViewComponentReplace: self) renderReplace]].
+				object isRailsThread
+					ifTrue: [self closeWindow]
+					ifFalse: [(threadReloaded windowViewComponentReplace: self) renderReplace]]].
 !
 
 reloadStackWithCallback: aBlock

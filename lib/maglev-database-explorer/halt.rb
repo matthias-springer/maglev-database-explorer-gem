@@ -10,10 +10,13 @@ module MaglevDatabaseExplorer
 
         if is_exception
           Thread.current.__set_exception(eval_result[1])
+          Thread.current[:is_rails_thread] = true
           eval_result[1] = Thread.current
           
           halted_threads.push(Thread.current)
+          Thread.current[:manual_stop] = true
           Thread.stop
+          Thread.current[:manual_stop] = false
           halted_threads.delete(Thread.current)
           eval_result[1].__exception.__resume
         else

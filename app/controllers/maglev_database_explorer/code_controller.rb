@@ -68,7 +68,7 @@ module MaglevDatabaseExplorer
         render :json => {:success => false, :exception => "object with id #{id} not found"}
       else
         result = obj.run
-        sleep 0.1 until obj.stop? and obj[:manual_stop]
+        sleep 0.1 until (obj.stop? and obj[:manual_stop]) or obj[:is_rails_thread]
         render :json => {:success => true, :result => result}
       end
     end

@@ -216,7 +216,7 @@ referencedClasses: ["MaglevWaitingWindow"]
 smalltalk.Maglev);
 
 
-smalltalk.Maglev.klass.iVarNames = ['instance','defaultWorkspaceId','persistentRootId','maglevSystemId'];
+smalltalk.Maglev.klass.iVarNames = ['instance','defaultWorkspaceId','persistentRootId','maglevSystemId','evalObjectId'];
 smalltalk.addMethod(
 unescape('_defaultWorkspaceId'),
 smalltalk.method({
@@ -244,6 +244,38 @@ var self=this;
 return self;},
 args: ["anInteger"],
 source: unescape('defaultWorkspaceId%3A%20anInteger%0A%09%22Called%20from%20JavaScript%20initializer.%22%0A%09defaultWorkspaceId%20%3A%3D%20anInteger.'),
+messageSends: [],
+referencedClasses: []
+}),
+smalltalk.Maglev.klass);
+
+smalltalk.addMethod(
+unescape('_evalObjectId'),
+smalltalk.method({
+selector: unescape('evalObjectId'),
+category: 'accessing',
+fn: function (){
+var self=this;
+return self['@evalObjectId'];
+return self;},
+args: [],
+source: unescape('evalObjectId%0A%09%5E%20evalObjectId'),
+messageSends: [],
+referencedClasses: []
+}),
+smalltalk.Maglev.klass);
+
+smalltalk.addMethod(
+unescape('_evalObjectId_'),
+smalltalk.method({
+selector: unescape('evalObjectId%3A'),
+category: 'accessing',
+fn: function (anInteger){
+var self=this;
+(self['@evalObjectId']=anInteger);
+return self;},
+args: ["anInteger"],
+source: unescape('evalObjectId%3A%20anInteger%0A%09evalObjectId%20%3A%3D%20anInteger.'),
 messageSends: [],
 referencedClasses: []
 }),
@@ -356,11 +388,13 @@ var self=this;
 smalltalk.send(self, "_openWindow_", [smalltalk.send(self, "_defaultWorkspaceId", [])]);
 smalltalk.send(self, "_openWindow_", [smalltalk.send(self, "_persistentRootId", [])]);
 smalltalk.send(self, "_openWindow_", [smalltalk.send(self, "_maglevSystemId", [])]);
+smalltalk.send(smalltalk.send((smalltalk.MaglevObjectSpace || MaglevObjectSpace), "_instance", []), "_evalObject_", [smalltalk.send(smalltalk.send((smalltalk.MaglevObjectSpace || MaglevObjectSpace), "_instance", []), "_reloadObject_", [smalltalk.send(self, "_evalObjectId", [])])]);
+smalltalk.send((smalltalk.MaglevHaltedThreadListener || MaglevHaltedThreadListener), "_start", []);
 return self;},
 args: [],
-source: unescape('ready%0A%09self%20openWindow%3A%20self%20defaultWorkspaceId.%0A%09self%20openWindow%3A%20self%20persistentRootId.%0A%09self%20openWindow%3A%20self%20maglevSystemId.'),
-messageSends: ["openWindow:", "defaultWorkspaceId", "persistentRootId", "maglevSystemId"],
-referencedClasses: []
+source: unescape('ready%0A%09self%20openWindow%3A%20self%20defaultWorkspaceId.%0A%09self%20openWindow%3A%20self%20persistentRootId.%0A%09self%20openWindow%3A%20self%20maglevSystemId.%0A%09MaglevObjectSpace%20instance%20%0A%09%09evalObject%3A%20%28MaglevObjectSpace%20instance%20reloadObject%3A%20self%20evalObjectId%29.%0A%09MaglevHaltedThreadListener%20start.'),
+messageSends: ["openWindow:", "defaultWorkspaceId", "persistentRootId", "maglevSystemId", "evalObject:", "instance", "reloadObject:", "evalObjectId", "start"],
+referencedClasses: ["MaglevObjectSpace", "MaglevHaltedThreadListener"]
 }),
 smalltalk.Maglev.klass);
 
@@ -3641,7 +3675,7 @@ referencedClasses: ["MaglevSymbolWindow"]
 smalltalk.MaglevSymbol.klass);
 
 
-smalltalk.addClass('MaglevThread', smalltalk.MaglevObject, ['exception', 'localStorage', 'localStorageSize', 'status'], 'Maglev-Core');
+smalltalk.addClass('MaglevThread', smalltalk.MaglevObject, ['exception', 'localStorage', 'localStorageSize', 'status', 'isRailsThread'], 'Maglev-Core');
 smalltalk.addMethod(
 unescape('_exception'),
 smalltalk.method({
@@ -3694,6 +3728,22 @@ referencedClasses: []
 smalltalk.MaglevThread);
 
 smalltalk.addMethod(
+unescape('_isRailsThread'),
+smalltalk.method({
+selector: unescape('isRailsThread'),
+category: 'accessing',
+fn: function (){
+var self=this;
+return smalltalk.send(self['@isRailsThread'], "__eq", [true]);
+return self;},
+args: [],
+source: unescape('isRailsThread%0A%09%5E%20isRailsThread%20%3D%20true'),
+messageSends: [unescape("%3D")],
+referencedClasses: []
+}),
+smalltalk.MaglevThread);
+
+smalltalk.addMethod(
 unescape('_localStorage'),
 smalltalk.method({
 selector: unescape('localStorage'),
@@ -3739,10 +3789,11 @@ smalltalk.send(self, "_parseJSON_", [obj], smalltalk.MaglevObject);
 (self['@localStorage']=smalltalk.send((smalltalk.MaglevObject || MaglevObject), "_newObject_", [smalltalk.send(obj, "_threadLocalStorage", [])]));
 (self['@localStorageSize']=smalltalk.send(obj, "_threadLocalStorageSize", []));
 (self['@status']=smalltalk.send(obj, "_status", []));
+(self['@isRailsThread']=smalltalk.send(obj, "_isRailsThread", []));
 return self;},
 args: ["obj"],
-source: unescape('parseJSON%3A%20obj%0A%09%7CobjException%7C%0A%09super%20parseJSON%3A%20obj.%0A%09objException%20%3A%3D%20obj%20at%3A%20%27exception%27.%0A%09objException%20ifNotNil%3A%20%5Bexception%20%3A%3D%20MaglevObject%20newObject%3A%20objException%5D.%0A%09localStorage%20%3A%3D%20MaglevObject%20newObject%3A%20obj%20threadLocalStorage.%0A%09localStorageSize%20%3A%3D%20obj%20threadLocalStorageSize.%0A%09status%20%3A%3D%20obj%20status.'),
-messageSends: ["parseJSON:", "at:", "ifNotNil:", "newObject:", "threadLocalStorage", "threadLocalStorageSize", "status"],
+source: unescape('parseJSON%3A%20obj%0A%09%7CobjException%7C%0A%09super%20parseJSON%3A%20obj.%0A%09objException%20%3A%3D%20obj%20at%3A%20%27exception%27.%0A%09objException%20ifNotNil%3A%20%5Bexception%20%3A%3D%20MaglevObject%20newObject%3A%20objException%5D.%0A%09localStorage%20%3A%3D%20MaglevObject%20newObject%3A%20obj%20threadLocalStorage.%0A%09localStorageSize%20%3A%3D%20obj%20threadLocalStorageSize.%0A%09status%20%3A%3D%20obj%20status.%0A%09isRailsThread%20%3A%3D%20obj%20isRailsThread.'),
+messageSends: ["parseJSON:", "at:", "ifNotNil:", "newObject:", "threadLocalStorage", "threadLocalStorageSize", "status", "isRailsThread"],
 referencedClasses: ["MaglevObject"]
 }),
 smalltalk.MaglevThread);
@@ -3917,7 +3968,7 @@ referencedClasses: ["MaglevThreadWindow"]
 smalltalk.MaglevThread.klass);
 
 
-smalltalk.addClass('MaglevObjectSpace', smalltalk.Object, ['objects'], 'Maglev-Core');
+smalltalk.addClass('MaglevObjectSpace', smalltalk.Object, ['objects', 'evalObject'], 'Maglev-Core');
 smalltalk.addMethod(
 unescape('_at_'),
 smalltalk.method({
@@ -3946,6 +3997,38 @@ return self;},
 args: ["anOop", "aBlock"],
 source: unescape('at%3A%20anOop%20withCallback%3A%20aBlock%0A%09%28objects%20includesKey%3A%20anOop%29%0A%09%09ifTrue%3A%20%5BaBlock%20value%3A%20%28objects%20at%3A%20anOop%29%5D%0A%09%09ifFalse%3A%20%5Bself%20reloadObject%3A%20anOop%20withCallback%3A%20aBlock%5D.'),
 messageSends: ["ifTrue:ifFalse:", "includesKey:", "value:", "at:", "reloadObject:withCallback:"],
+referencedClasses: []
+}),
+smalltalk.MaglevObjectSpace);
+
+smalltalk.addMethod(
+unescape('_evalObject'),
+smalltalk.method({
+selector: unescape('evalObject'),
+category: 'accessing',
+fn: function (){
+var self=this;
+return self['@evalObject'];
+return self;},
+args: [],
+source: unescape('evalObject%0A%09%5E%20evalObject'),
+messageSends: [],
+referencedClasses: []
+}),
+smalltalk.MaglevObjectSpace);
+
+smalltalk.addMethod(
+unescape('_evalObject_'),
+smalltalk.method({
+selector: unescape('evalObject%3A'),
+category: 'accessing',
+fn: function (anObject){
+var self=this;
+(self['@evalObject']=anObject);
+return self;},
+args: ["anObject"],
+source: unescape('evalObject%3A%20anObject%0A%09evalObject%20%3A%3D%20anObject.'),
+messageSends: [],
 referencedClasses: []
 }),
 smalltalk.MaglevObjectSpace);

@@ -17,7 +17,8 @@
 
       smalltalk.Maglev._persistentRootId_(<%= Maglev::PERSISTENT_ROOT.object_id %>);
       smalltalk.Maglev._maglevSystemId_(<%= Maglev::System.object_id %>);
-      smalltalk.Maglev._defaultWorkspaceId_(<%= RubyWorkspace.default_instance.object_id %>),
+      smalltalk.Maglev._defaultWorkspaceId_(<%= RubyWorkspace.default_instance.object_id %>);
+      smalltalk.Maglev._evalObjectId_(<%= MaglevDatabaseExplorer.eval_object.object_id %>);
 
       smalltalk.Maglev._ready();
     }
