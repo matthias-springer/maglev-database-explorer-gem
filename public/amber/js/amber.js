@@ -68,7 +68,14 @@ amber = (function() {
 				'Kernel-Exceptions.deploy',
 				'Kernel-Transcript.deploy',
 				'Kernel-Announcements.deploy',
-				'Canvas.deploy'
+				'Canvas.deploy',
+
+        'Compiler',
+        'parser',
+
+        'Maglev-Core.deploy',
+        'Maglev-Database-Explorer.deploy',
+        'Maglev-Vendor.deploy'
 			]);
 		} else {
 			loadIDEDependencies();
