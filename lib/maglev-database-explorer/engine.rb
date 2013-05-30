@@ -4,6 +4,10 @@ module MaglevDatabaseExplorer
 
     initializer "maglev-database-explorer" do |app|
       app.config.threadsafe!
+
+      app.config.after_initialize do
+        MaglevDatabaseExplorer.ensure_debug_server_running!
+      end
     end
   end
 
