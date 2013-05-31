@@ -1447,7 +1447,9 @@ selector: unescape('initializeEditor'),
 fn: function (){
 var self=this;
 var params=nil;
-(params=(function($rec){smalltalk.send($rec, "_basicAt_put_", ["mode", unescape("text/x-ruby")]);smalltalk.send($rec, "_basicAt_put_", ["styleActiveLine", true]);smalltalk.send($rec, "_basicAt_put_", ["lineNumbers", true]);smalltalk.send($rec, "_basicAt_put_", ["matchBrackets", true]);return smalltalk.send($rec, "_yourself", []);})(smalltalk.send((smalltalk.Object || Object), "_new", [])));
+var extraKeys=nil;
+(extraKeys=(function($rec){smalltalk.send($rec, "_basicAt_put_", [unescape("Ctrl-D"), (function(){return smalltalk.send(self, "_evalPrintIt", []);})]);smalltalk.send($rec, "_basicAt_put_", [unescape("Ctrl-P"), (function(){return smalltalk.send(self, "_evalPrintIt", []);})]);smalltalk.send($rec, "_basicAt_put_", [unescape("Ctrl-S"), (function(){return smalltalk.send(self, "_evalPrintIt", []);})]);return smalltalk.send($rec, "_yourself", []);})(smalltalk.send((smalltalk.Object || Object), "_new", [])));
+(params=(function($rec){smalltalk.send($rec, "_basicAt_put_", ["mode", unescape("text/x-ruby")]);smalltalk.send($rec, "_basicAt_put_", ["styleActiveLine", true]);smalltalk.send($rec, "_basicAt_put_", ["lineNumbers", true]);smalltalk.send($rec, "_basicAt_put_", ["matchBrackets", true]);smalltalk.send($rec, "_basicAt_put_", ["extraKeys", extraKeys]);return smalltalk.send($rec, "_yourself", []);})(smalltalk.send((smalltalk.Object || Object), "_new", [])));
 (self['@editor']=smalltalk.send((smalltalk.CodeMirror || CodeMirror), "_value_value_", [smalltalk.send(smalltalk.send(self['@editorElement'], "_asJQuery", []), "_at_", [(0)]), params]));
 smalltalk.send(self['@editor'], "_setValue_", [""]);
 return self;}
@@ -1525,9 +1527,7 @@ smalltalk.method({
 selector: unescape('renderButtonsOn%3A'),
 fn: function (html){
 var self=this;
-(function($rec){smalltalk.send($rec, "_class_", [unescape("btn%20btn-primary")]);smalltalk.send($rec, "_type_", ["button"]);smalltalk.send($rec, "_with_", ["Do it"]);return smalltalk.send($rec, "_onClick_", [(function(){return smalltalk.send(self, "_evalDoIt", []);})]);})(smalltalk.send(html, "_button", []));
-(function($rec){smalltalk.send($rec, "_class_", [unescape("btn%20btn-primary")]);smalltalk.send($rec, "_type_", ["button"]);smalltalk.send($rec, "_with_", ["Print it"]);return smalltalk.send($rec, "_onClick_", [(function(){return smalltalk.send(self, "_evalPrintIt", []);})]);})(smalltalk.send(html, "_button", []));
-(function($rec){smalltalk.send($rec, "_class_", [unescape("btn%20btn-primary")]);smalltalk.send($rec, "_type_", ["button"]);smalltalk.send($rec, "_with_", ["Inspect it"]);return smalltalk.send($rec, "_onClick_", [(function(){return smalltalk.send(self, "_evalInspectIt", []);})]);})(smalltalk.send(html, "_button", []));
+(function($rec){smalltalk.send($rec, "_class_", [unescape("btn%20btn-primary")]);smalltalk.send($rec, "_type_", ["button"]);smalltalk.send($rec, "_style_", [unescape("margin-right%3A%2010px%3B")]);smalltalk.send($rec, "_with_", ["Print it"]);return smalltalk.send($rec, "_onClick_", [(function(){return smalltalk.send(self, "_evalPrintIt", []);})]);})(smalltalk.send(html, "_button", []));
 (function($rec){smalltalk.send($rec, "_class_", [unescape("btn-group")]);smalltalk.send($rec, "_style_", [unescape("float%3A%20right%3B")]);smalltalk.send($rec, "_data_with_", ["toggle", unescape("buttons-radio")]);return smalltalk.send($rec, "_with_", [(function(){(self['@rubyButton']=(function($rec){smalltalk.send($rec, "_class_", ["btn active"]);smalltalk.send($rec, "_data_with_", ["toggle", unescape("buttons-checkbox")]);smalltalk.send($rec, "_onClick_", [(function(){return smalltalk.send(self, "_languageChanged", []);})]);smalltalk.send($rec, "_type_", ["button"]);return smalltalk.send($rec, "_with_", ["Ruby"]);})(smalltalk.send(html, "_button", [])));return (self['@smalltalkButton']=(function($rec){smalltalk.send($rec, "_class_", ["btn"]);smalltalk.send($rec, "_data_with_", ["toggle", unescape("buttons-checkbox")]);smalltalk.send($rec, "_onClick_", [(function(){return smalltalk.send(self, "_languageChanged", []);})]);smalltalk.send($rec, "_type_", ["button"]);return smalltalk.send($rec, "_with_", ["Smalltalk"]);})(smalltalk.send(html, "_button", [])));})]);})(smalltalk.send(html, "_div", []));
 return self;}
 }),

@@ -881,12 +881,18 @@ language
 !MaglevObjectDropdown methodsFor: 'initializing'!
 
 initializeEditor
-	|params|
+	|params extraKeys|
+	extraKeys := Object new
+		basicAt: 'Ctrl-D' put: [self evalPrintIt];
+		basicAt: 'Ctrl-P' put: [self evalPrintIt];
+		basicAt: 'Ctrl-S' put: [self evalPrintIt];
+		yourself.
 	params := Object new
 		basicAt: 'mode' put: 'text/x-ruby';
 		basicAt: 'styleActiveLine' put: true;
 		basicAt: 'lineNumbers' put: true;
 		basicAt: 'matchBrackets' put: true;
+		basicAt: 'extraKeys' put: extraKeys;
 		yourself. 
 	editor := CodeMirror value: (editorElement asJQuery at: 0) value: params.
 	editor setValue: ''.
@@ -956,21 +962,22 @@ languageChanged
 !MaglevObjectDropdown methodsFor: 'rendering'!
 
 renderButtonsOn: html
-	html button
+	"html button
 		class: 'btn btn-primary';
 		type: 'button';
 		with: 'Do it';
-		onClick: [self evalDoIt].
+		onClick: [self evalDoIt]."
 	html button
 		class: 'btn btn-primary';
 		type: 'button';
+		style: 'margin-right: 10px;';
 		with: 'Print it';
 		onClick: [self evalPrintIt].
-	html button
+	"html button
 		class: 'btn btn-primary';
 		type: 'button';
 		with: 'Inspect it';
-		onClick: [self evalInspectIt].
+		onClick: [self evalInspectIt]."
 	html div
 		class: 'btn-group';
 		style: 'float: right;';

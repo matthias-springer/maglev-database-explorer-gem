@@ -53,8 +53,7 @@ module MaglevDatabaseExplorer
     private
     
     def store_object(obj)
-      Maglev::PERSISTENT_ROOT[:debug_storage] ||= {}
-      Maglev::PERSISTENT_ROOT[:debug_storage][obj.object_id] = obj
+      MaglevDatabaseExplorer.store_debug_object(obj)
     end  
   end
 end

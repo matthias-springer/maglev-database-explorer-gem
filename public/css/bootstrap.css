@@ -4164,9 +4164,9 @@ input[type="submit"].btn.btn-mini {
 }
 
 .nav .dropdown-toggle .caret {
-  margin-top: 6px;
-  border-top-color: #007fff;
-  border-bottom-color: #007fff;
+  margin-top: 8px;
+  /*border-top-color: #007fff;
+  border-bottom-color: #007fff;*/
 }
 
 .nav .dropdown-toggle:hover .caret,
@@ -6329,7 +6329,7 @@ div.subnav-fixed {
 
 .nav .open .dropdown-toggle,
 .nav > li.dropdown.open.active > a:hover {
-  color: #007fff;
+  /*color: #007fff;*/
 }
 
 .nav-tabs > li > a {
