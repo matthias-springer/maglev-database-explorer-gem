@@ -54,6 +54,6 @@ module MaglevDatabaseExplorer
     
     def store_object(obj)
       MaglevDatabaseExplorer.store_debug_object(obj)
-    end  
+    end
   end
 end

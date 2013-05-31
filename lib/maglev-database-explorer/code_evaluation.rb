@@ -2,7 +2,17 @@ class CodeEvaluation
   class << self
     def wait_for_eval_thread(&block)
       eval_thread = Thread.start do
-        value_proc = Proc.new(&block)
+        value_proc = Proc.new do
+          if Maglev::System.__DBEPersistenceMode
+            Maglev.persistent do
+              block.call
+            end
+          else
+            Maglev.transient do
+              block.call
+            end
+          end
+        end
 
         value_proc.__call_and_rescue do |eval_result|
           is_exception = eval_result[0]

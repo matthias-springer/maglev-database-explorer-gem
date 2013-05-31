@@ -6,7 +6,7 @@ class GsNMethodProxy
   end
 
   def __for_database_explorer
-    [@method.__source_string, @method.__environment_id, @method.__selector, @method.__file_and_line]
+    [@method.__source_string, @method.__environment_id, @method.__selector, @method.__file_and_line, @method.__in_class.to_database_view(1, {}, {:noBehavior => true})]
   end
 
   def method=(val)
@@ -15,6 +15,7 @@ class GsNMethodProxy
 end
 
 class GsNMethod
+  primitive '__in_class', 'inClass'
   primitive '__source_string', 'sourceString'
   primitive '__environment_id', 'environmentId'
   primitive '__description_for_stack', '_descrForStack'

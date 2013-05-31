@@ -48,7 +48,7 @@ Widget subclass: #MaglevGsNMethodEditor
 !MaglevGsNMethodEditor methodsFor: 'accessing'!
 
 classObject
-	^ classObject
+	^ MaglevObject newObjectWithoutUpdate: (self methodObject at: 5)
 !
 
 classObject: anObject
@@ -130,14 +130,14 @@ commandSave
 	errorBox hide.
 	errorBox asJQuery empty.
 	self envId = 1
-		ifTrue: [classObject
-			compileRubySourceCode: editor getValue 
+		ifTrue: [self classObject
+			compileRubySourceCode: (editor getValue replace: '⚡' with: '')
 			withCallback: [:success :obj |
 				success
 					ifTrue: [self signalSuccess]
 					ifFalse: [self signalFailure: obj]]]
-		ifFalse: [classObject 
-			compileSmalltalkSourceCode: editor getValue 
+		ifFalse: [self classObject 
+			compileSmalltalkSourceCode: (editor getValue replace: '⚡' with: '')
 			withCallback: [:success :obj |
 				success
 					ifTrue: [self signalSuccess]
@@ -2555,7 +2555,7 @@ renderWindowTitleContentOn: html
 ! !
 
 MaglevClassWindow subclass: #MaglevSystemClassWindow
-	instanceVariableNames: 'transactionResultBox'
+	instanceVariableNames: 'transactionResultBox persistenceModeButton'
 	package: 'Maglev-Database-Explorer'!
 
 !MaglevSystemClassWindow methodsFor: 'interactions'!
@@ -2604,6 +2604,44 @@ continueTransaction
 
 defaultTab
 	^ 'Control Panel'
+!
+
+togglePersistentMode
+	self showTransactionWaitingBox.
+	object 
+		evaluate: 'self.__DBETogglePersistenceMode'
+		language: 'ruby'
+		withCallback: [:success :resultObj |
+			transactionResultBox asJQuery empty.
+			transactionResultBox removeClass: 'alert-info'.
+			success
+				ifTrue: [
+					transactionResultBox addClass: 'alert-success'.
+					resultObj value = true
+						ifTrue: [persistenceModeButton asJQuery addClass: 'active']
+						ifFalse: [persistenceModeButton asJQuery removeClass: 'active'].
+					transactionResultBox hide]
+				ifFalse: [transactionResultBox addClass: 'alert-error'].
+			transactionResultBox with: resultObj inlineViewComponent].
+!
+
+updatePersistentMode
+	self showTransactionWaitingBox.
+	object 
+		evaluate: 'self.__DBEPersistenceMode'
+		language: 'ruby'
+		withCallback: [:success :resultObj |
+			transactionResultBox asJQuery empty.
+			transactionResultBox removeClass: 'alert-info'.
+			success
+				ifTrue: [
+					transactionResultBox addClass: 'alert-success'.
+					resultObj value = true
+						ifTrue: [persistenceModeButton asJQuery addClass: 'active']
+						ifFalse: [persistenceModeButton asJQuery removeClass: 'active'].
+					transactionResultBox hide]
+				ifFalse: [transactionResultBox addClass: 'alert-error'].
+			transactionResultBox with: resultObj inlineViewComponent].
 ! !
 
 !MaglevSystemClassWindow methodsFor: 'rendering'!
@@ -2626,24 +2664,31 @@ renderControlPanelOn: html
 					type: 'button';
 					class: 'btn btn-warning';
 					value: 'Abort Transaction';
-					style: 'width: 32%; margin-right: 1%;';
+					style: 'width: 25%; margin-right: 1%;';
 					onClick: [self abortTransaction].
 				html input
 					type: 'button';
 					class: 'btn btn-warning';
 					value: 'Commit Transaction';
-					style: 'width: 32%; margin-right: 1%;';
+					style: 'width: 25%; margin-right: 1%;';
 					onClick: [self commitTransaction].
 				html input
 					type: 'button';
 					class: 'btn btn-warning';
 					value: 'Continue Transaction';
-					style: 'width: 33%;';
+					style: 'width: 25%; margin-right: 1%;';
 					onClick: [self continueTransaction].
+				persistenceModeButton := html input
+					type: 'button';
+					class: 'btn';
+					value: 'Persistent Mode';
+					style: 'width: 22%;';
+					onClick: [self togglePersistentMode].
 				transactionResultBox := html div
 					style: 'margin-top: 10px; margin-bottom: 0px;';
 					class: 'alert';
 					hide]].
+	self updatePersistentMode.
 !
 
 renderGemVersionReportOn: html
@@ -2806,7 +2851,7 @@ reloadStackWithCallback: aBlock
 
 selectStackFrame: anInteger
 	< self['@methodSelect']._asJQuery()[0].selectedIndex = anInteger - 1; >.
-	self renderFrame.
+	self renderFrame: anInteger.
 !
 
 stepInto

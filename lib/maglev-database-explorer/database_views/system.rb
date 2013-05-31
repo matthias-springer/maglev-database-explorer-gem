@@ -7,6 +7,19 @@ class Maglev::System
   class_primitive '__continue_transaction', 'continueTransaction'
 
   class << self
+    def __DBETogglePersistenceMode
+      @dbe_persistence_mode = !__DBEPersistenceMode
+      @dbe_persistence_mode
+    end
+
+    def __DBEPersistenceMode
+      if @dbe_persistence_mode == nil
+        @dbe_persistence_mode = false
+      end
+
+      @dbe_persistence_mode
+    end
+
     def __DBECommitTransaction
       DBEBootstrapChanges.undo_all_changes
       __commit_transaction
