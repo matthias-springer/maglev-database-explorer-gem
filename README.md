@@ -39,8 +39,7 @@ You can access MagLev Database Explorer at this URL: ```http://hostname:3001/mag
 Stand-alone application
 -----------------------
 
-There's currently no proper support for running MagLev Database Explorer stand-alone. You can clone the Github repository and start the Rails application in the directory ```test/dummy```. You can access MagLev Database Explorer at ```http://hostname:3001/maglev-database-explorer/```.
-
+Install the Gem and run ```maglev-database-explorer``` on your console.
 
 Rails Debugging
 ===============
