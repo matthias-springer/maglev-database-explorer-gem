@@ -19,5 +19,6 @@ module MaglevDatabaseExplorer
   def self.eval_object
     @eval_object ||= Object.new
   end
+
 end
 

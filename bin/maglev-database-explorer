@@ -1,0 +1,3 @@
+#!/usr/bin/env ruby
+system("#{File.expand_path("../../standalone/script/rails", __FILE__)} server")
+
