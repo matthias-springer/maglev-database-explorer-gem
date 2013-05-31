@@ -1,3 +1,6 @@
+mkdir_public = "mkdir -p \"#{Dir.getwd}/public\""
+system(mkdir_public)
+
 create_public_link = "ln -sfT \"#{MaglevDatabaseExplorer.full_gem_path}/public\" \"#{Dir.getwd}/public/maglev-database-explorer\""
 
 puts "Creating symlink: #{create_public_link}"
@@ -7,8 +10,8 @@ if not system(create_public_link)
   exit
 end
 
-# Workaround for symlinks not working correctly on MagLev
-create_views_link ="ln -sfT \"#{MaglevDatabaseExplorer.full_gem_path}/app/views/maglev_database_explorer\" \"#{Dir.getwd}/app/views/maglev_database_explorer\""
+# Workaround for engine paths not working correctly on MagLev
+create_views_link = "ln -sfT \"#{MaglevDatabaseExplorer.full_gem_path}/app/views/maglev_database_explorer\" \"#{Dir.getwd}/app/views/maglev_database_explorer\""
 
 puts "Creating symlink: #{create_views_link}"
 
