@@ -3,6 +3,7 @@ MagLev Database Explorer
 
 MagLev Database Explorer is a Rails application that allow you to view and modify objects persisted in MagLev/GemStone and to debug Rails applications. MagLev Database Explorer is a Rails Engine that can be integrated in your Rails application. 
 
+http://www.youtube.com/watch?v=27mS1BNP7wQ
 
 Installation
 ============
