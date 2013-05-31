@@ -46,7 +46,29 @@ return self;}
 smalltalk.MaglevDraggableObject.klass);
 
 
-smalltalk.addClass('MaglevGsNMethodEditor', smalltalk.Widget, ['object', 'editorContainer', 'errorBox', 'rubyIcon', 'stIcon', 'envIdContainer', 'sourceLocationContainer', 'editor', 'editorHeight', 'editorWidth'], 'Maglev-Database-Explorer');
+smalltalk.addClass('MaglevGsNMethodEditor', smalltalk.Widget, ['object', 'editorContainer', 'errorBox', 'rubyIcon', 'stIcon', 'envIdContainer', 'sourceLocationContainer', 'editor', 'editorHeight', 'editorWidth', 'classObject'], 'Maglev-Database-Explorer');
+smalltalk.addMethod(
+unescape('_classObject'),
+smalltalk.method({
+selector: unescape('classObject'),
+fn: function (){
+var self=this;
+return self['@classObject'];
+return self;}
+}),
+smalltalk.MaglevGsNMethodEditor);
+
+smalltalk.addMethod(
+unescape('_classObject_'),
+smalltalk.method({
+selector: unescape('classObject%3A'),
+fn: function (anObject){
+var self=this;
+(self['@classObject']=anObject);
+return self;}
+}),
+smalltalk.MaglevGsNMethodEditor);
+
 smalltalk.addMethod(
 unescape('_commandSave'),
 smalltalk.method({
@@ -56,7 +78,7 @@ var self=this;
 var selectedCategory=nil;
 smalltalk.send(self['@errorBox'], "_hide", []);
 smalltalk.send(smalltalk.send(self['@errorBox'], "_asJQuery", []), "_empty", []);
-((($receiver = smalltalk.send(smalltalk.send(self['@object'], "_environmentId", []), "__eq", [(1)])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(self['@object'], "_compileRubySourceCode_withCallback_", [smalltalk.send(self['@editor'], "_getValue", []), (function(success, obj){return ((($receiver = smalltalk.send(obj, "_isException", [])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(self, "_signalFailure_", [obj]);})() : (function(){return smalltalk.send(self, "_signalSuccess", []);})()) : smalltalk.send($receiver, "_ifTrue_ifFalse_", [(function(){return smalltalk.send(self, "_signalFailure_", [obj]);}), (function(){return smalltalk.send(self, "_signalSuccess", []);})]));})]);})() : (function(){return smalltalk.send(self['@object'], "_compileSmalltalkSourceCode_withCallback_", [smalltalk.send(self['@editor'], "_getValue", []), (function(success, obj){return ((($receiver = smalltalk.send(obj, "_isException", [])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(self, "_signalFailure_", [obj]);})() : (function(){return smalltalk.send(self, "_signalSuccess", []);})()) : smalltalk.send($receiver, "_ifTrue_ifFalse_", [(function(){return smalltalk.send(self, "_signalFailure_", [obj]);}), (function(){return smalltalk.send(self, "_signalSuccess", []);})]));})]);})()) : smalltalk.send($receiver, "_ifTrue_ifFalse_", [(function(){return smalltalk.send(self['@object'], "_compileRubySourceCode_withCallback_", [smalltalk.send(self['@editor'], "_getValue", []), (function(success, obj){return ((($receiver = smalltalk.send(obj, "_isException", [])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(self, "_signalFailure_", [obj]);})() : (function(){return smalltalk.send(self, "_signalSuccess", []);})()) : smalltalk.send($receiver, "_ifTrue_ifFalse_", [(function(){return smalltalk.send(self, "_signalFailure_", [obj]);}), (function(){return smalltalk.send(self, "_signalSuccess", []);})]));})]);}), (function(){return smalltalk.send(self['@object'], "_compileSmalltalkSourceCode_withCallback_", [smalltalk.send(self['@editor'], "_getValue", []), (function(success, obj){return ((($receiver = smalltalk.send(obj, "_isException", [])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(self, "_signalFailure_", [obj]);})() : (function(){return smalltalk.send(self, "_signalSuccess", []);})()) : smalltalk.send($receiver, "_ifTrue_ifFalse_", [(function(){return smalltalk.send(self, "_signalFailure_", [obj]);}), (function(){return smalltalk.send(self, "_signalSuccess", []);})]));})]);})]));
+((($receiver = smalltalk.send(smalltalk.send(self, "_envId", []), "__eq", [(1)])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(self['@classObject'], "_compileRubySourceCode_withCallback_", [smalltalk.send(self['@editor'], "_getValue", []), (function(success, obj){return ((($receiver = success).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(self, "_signalSuccess", []);})() : (function(){return smalltalk.send(self, "_signalFailure_", [obj]);})()) : smalltalk.send($receiver, "_ifTrue_ifFalse_", [(function(){return smalltalk.send(self, "_signalSuccess", []);}), (function(){return smalltalk.send(self, "_signalFailure_", [obj]);})]));})]);})() : (function(){return smalltalk.send(self['@classObject'], "_compileSmalltalkSourceCode_withCallback_", [smalltalk.send(self['@editor'], "_getValue", []), (function(success, obj){return ((($receiver = success).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(self, "_signalSuccess", []);})() : (function(){return smalltalk.send(self, "_signalFailure_", [obj]);})()) : smalltalk.send($receiver, "_ifTrue_ifFalse_", [(function(){return smalltalk.send(self, "_signalSuccess", []);}), (function(){return smalltalk.send(self, "_signalFailure_", [obj]);})]));})]);})()) : smalltalk.send($receiver, "_ifTrue_ifFalse_", [(function(){return smalltalk.send(self['@classObject'], "_compileRubySourceCode_withCallback_", [smalltalk.send(self['@editor'], "_getValue", []), (function(success, obj){return ((($receiver = success).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(self, "_signalSuccess", []);})() : (function(){return smalltalk.send(self, "_signalFailure_", [obj]);})()) : smalltalk.send($receiver, "_ifTrue_ifFalse_", [(function(){return smalltalk.send(self, "_signalSuccess", []);}), (function(){return smalltalk.send(self, "_signalFailure_", [obj]);})]));})]);}), (function(){return smalltalk.send(self['@classObject'], "_compileSmalltalkSourceCode_withCallback_", [smalltalk.send(self['@editor'], "_getValue", []), (function(success, obj){return ((($receiver = success).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(self, "_signalSuccess", []);})() : (function(){return smalltalk.send(self, "_signalFailure_", [obj]);})()) : smalltalk.send($receiver, "_ifTrue_ifFalse_", [(function(){return smalltalk.send(self, "_signalSuccess", []);}), (function(){return smalltalk.send(self, "_signalFailure_", [obj]);})]));})]);})]));
 return self;}
 }),
 smalltalk.MaglevGsNMethodEditor);
@@ -3639,7 +3661,10 @@ smalltalk.method({
 selector: unescape('renderMethodObject%3A'),
 fn: function (obj){
 var self=this;
-smalltalk.send(self['@methodContainer'], "_with_", [smalltalk.send((smalltalk.MaglevGsNMethodEditor || MaglevGsNMethodEditor), "_for_", [obj])]);
+var methodEditor=nil;
+(methodEditor=smalltalk.send((smalltalk.MaglevGsNMethodEditor || MaglevGsNMethodEditor), "_for_", [obj]));
+smalltalk.send(methodEditor, "_classObject_", [self['@object']]);
+smalltalk.send(self['@methodContainer'], "_with_", [methodEditor]);
 smalltalk.send(self['@waitingScreen'], "_hide", []);
 return self;}
 }),

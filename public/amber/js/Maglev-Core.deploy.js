@@ -1921,6 +1921,28 @@ return self;}
 smalltalk.MaglevModule);
 
 smalltalk.addMethod(
+unescape('_compileRubySourceCode_withCallback_'),
+smalltalk.method({
+selector: unescape('compileRubySourceCode%3AwithCallback%3A'),
+fn: function (sourceCode, aBlock){
+var self=this;
+smalltalk.send(self, "_evaluateWithoutUpdate_language_with_withCallback_", [sourceCode, "rubyClass", smalltalk.send((smalltalk.Dictionary || Dictionary), "_new", []), aBlock]);
+return self;}
+}),
+smalltalk.MaglevModule);
+
+smalltalk.addMethod(
+unescape('_compileSmalltalkSourceCode_withCallback_'),
+smalltalk.method({
+selector: unescape('compileSmalltalkSourceCode%3AwithCallback%3A'),
+fn: function (sourceCode, aBlock){
+var self=this;
+smalltalk.send(self, "_evaluateWithoutUpdate_language_with_withCallback_", [smalltalk.send(smalltalk.send(unescape("self%20compile%3A%20%27"), "__comma", [smalltalk.send(sourceCode, "_escapedString", [])]), "__comma", [unescape("%27.")]), "smalltalk", smalltalk.send((smalltalk.Dictionary || Dictionary), "_new", []), aBlock]);
+return self;}
+}),
+smalltalk.MaglevModule);
+
+smalltalk.addMethod(
 unescape('_constants'),
 smalltalk.method({
 selector: unescape('constants'),

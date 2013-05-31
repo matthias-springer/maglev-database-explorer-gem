@@ -42,10 +42,18 @@ with: anObject
 ! !
 
 Widget subclass: #MaglevGsNMethodEditor
-	instanceVariableNames: 'object editorContainer errorBox rubyIcon stIcon envIdContainer sourceLocationContainer editor editorHeight editorWidth'
+	instanceVariableNames: 'object editorContainer errorBox rubyIcon stIcon envIdContainer sourceLocationContainer editor editorHeight editorWidth classObject'
 	package: 'Maglev-Database-Explorer'!
 
 !MaglevGsNMethodEditor methodsFor: 'accessing'!
+
+classObject
+	^ classObject
+!
+
+classObject: anObject
+	classObject := anObject.
+!
 
 envId
 	^ self methodObject at: 2
@@ -121,19 +129,19 @@ commandSave
 	|selectedCategory|
 	errorBox hide.
 	errorBox asJQuery empty.
-	object environmentId = 1
-		ifTrue: [object
+	self envId = 1
+		ifTrue: [classObject
 			compileRubySourceCode: editor getValue 
 			withCallback: [:success :obj |
-				obj isException
-					ifTrue: [self signalFailure: obj]
-					ifFalse: [self signalSuccess]]]
-		ifFalse: [object 
+				success
+					ifTrue: [self signalSuccess]
+					ifFalse: [self signalFailure: obj]]]
+		ifFalse: [classObject 
 			compileSmalltalkSourceCode: editor getValue 
 			withCallback: [:success :obj |
-				obj isException
-					ifTrue: [self signalFailure: obj]
-					ifFalse: [self signalSuccess]]].
+				success
+					ifTrue: [self signalSuccess]
+					ifFalse: [self signalFailure: obj]]].
 !
 
 signalFailure: aDescription
@@ -2460,7 +2468,10 @@ renderListsOn: html
 !
 
 renderMethodObject: obj
-	methodContainer with: (MaglevGsNMethodEditor for: obj).
+	|methodEditor|
+	methodEditor := MaglevGsNMethodEditor for: obj.
+	methodEditor classObject: object.
+	methodContainer with: methodEditor.
 	waitingScreen hide.
 !
 

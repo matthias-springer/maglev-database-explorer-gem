@@ -2716,6 +2716,38 @@ referencedClasses: ["MaglevAjax", "Dictionary"]
 smalltalk.MaglevModule);
 
 smalltalk.addMethod(
+unescape('_compileRubySourceCode_withCallback_'),
+smalltalk.method({
+selector: unescape('compileRubySourceCode%3AwithCallback%3A'),
+category: 'interactions',
+fn: function (sourceCode, aBlock){
+var self=this;
+smalltalk.send(self, "_evaluateWithoutUpdate_language_with_withCallback_", [sourceCode, "rubyClass", smalltalk.send((smalltalk.Dictionary || Dictionary), "_new", []), aBlock]);
+return self;},
+args: ["sourceCode", "aBlock"],
+source: unescape('compileRubySourceCode%3A%20sourceCode%20withCallback%3A%20aBlock%0A%09self%20%0A%09%09evaluateWithoutUpdate%3A%20sourceCode%0A%09%09language%3A%20%27rubyClass%27%0A%09%09with%3A%20Dictionary%20new%0A%09%09withCallback%3A%20aBlock.'),
+messageSends: ["evaluateWithoutUpdate:language:with:withCallback:", "new"],
+referencedClasses: ["Dictionary"]
+}),
+smalltalk.MaglevModule);
+
+smalltalk.addMethod(
+unescape('_compileSmalltalkSourceCode_withCallback_'),
+smalltalk.method({
+selector: unescape('compileSmalltalkSourceCode%3AwithCallback%3A'),
+category: 'interactions',
+fn: function (sourceCode, aBlock){
+var self=this;
+smalltalk.send(self, "_evaluateWithoutUpdate_language_with_withCallback_", [smalltalk.send(smalltalk.send(unescape("self%20compile%3A%20%27"), "__comma", [smalltalk.send(sourceCode, "_escapedString", [])]), "__comma", [unescape("%27.")]), "smalltalk", smalltalk.send((smalltalk.Dictionary || Dictionary), "_new", []), aBlock]);
+return self;},
+args: ["sourceCode", "aBlock"],
+source: unescape('compileSmalltalkSourceCode%3A%20sourceCode%20withCallback%3A%20aBlock%0A%09self%20%0A%09%09evaluateWithoutUpdate%3A%20%27self%20compile%3A%20%27%27%27%2C%20sourceCode%20escapedString%2C%20%27%27%27.%27%0A%09%09language%3A%20%27smalltalk%27%0A%09%09with%3A%20Dictionary%20new%0A%09%09withCallback%3A%20aBlock.'),
+messageSends: ["evaluateWithoutUpdate:language:with:withCallback:", unescape("%2C"), "escapedString", "new"],
+referencedClasses: ["Dictionary"]
+}),
+smalltalk.MaglevModule);
+
+smalltalk.addMethod(
 unescape('_constants'),
 smalltalk.method({
 selector: unescape('constants'),

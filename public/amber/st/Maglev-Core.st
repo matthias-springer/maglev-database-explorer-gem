@@ -1120,6 +1120,22 @@ allSelectorsWithCallback: aBlock
 		withCallback: aBlock.
 !
 
+compileRubySourceCode: sourceCode withCallback: aBlock
+	self 
+		evaluateWithoutUpdate: sourceCode
+		language: 'rubyClass'
+		with: Dictionary new
+		withCallback: aBlock.
+!
+
+compileSmalltalkSourceCode: sourceCode withCallback: aBlock
+	self 
+		evaluateWithoutUpdate: 'self compile: ''', sourceCode escapedString, '''.'
+		language: 'smalltalk'
+		with: Dictionary new
+		withCallback: aBlock.
+!
+
 ensureSuperListLoadedWithCallback: aBlock
 	superList 
 		ifNil: [MaglevAjax 

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    maglev-database-explorer (0.0.1)
+    maglev-database-explorer (0.0.2)
       rails (~> 3.2.8)
       sqlite3
 
