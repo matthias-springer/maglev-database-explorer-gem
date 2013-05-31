@@ -156,7 +156,7 @@ return self;}
 smalltalk.Maglev);
 
 
-smalltalk.Maglev.klass.iVarNames = ['instance','defaultWorkspaceId','persistentRootId','maglevSystemId','evalObjectId'];
+smalltalk.Maglev.klass.iVarNames = ['instance','defaultWorkspaceId','persistentRootId','maglevSystemId','evalObjectId','swatchDesign'];
 smalltalk.addMethod(
 unescape('_defaultWorkspaceId'),
 smalltalk.method({
@@ -280,6 +280,18 @@ smalltalk.send(self, "_openWindow_", [smalltalk.send(self, "_maglevSystemId", []
 smalltalk.send(smalltalk.send((smalltalk.MaglevObjectSpace || MaglevObjectSpace), "_instance", []), "_evalObject_", [smalltalk.send(smalltalk.send((smalltalk.MaglevObjectSpace || MaglevObjectSpace), "_instance", []), "_reloadObject_", [smalltalk.send(self, "_evalObjectId", [])])]);
 smalltalk.send((smalltalk.MaglevHaltedThreadListener || MaglevHaltedThreadListener), "_start", []);
 smalltalk.send((smalltalk.MaglevWebBrowserWindow || MaglevWebBrowserWindow), "_showNew", []);
+return self;}
+}),
+smalltalk.Maglev.klass);
+
+smalltalk.addMethod(
+unescape('_swatchDesign'),
+smalltalk.method({
+selector: unescape('swatchDesign'),
+fn: function (){
+var self=this;
+(($receiver = self['@swatchDesign']) == nil || $receiver == undefined) ? (function(){var html=nil;
+(html=smalltalk.send((smalltalk.HTMLCanvas || HTMLCanvas), "_onJQuery_", [smalltalk.send("head", "_asJQuery", [])]));return (self['@swatchDesign']=(function($rec){smalltalk.send($rec, "_href_", [unescape("themes/geo-bootstrap/swatch/bootstrap.css")]);return smalltalk.send($rec, "_rel_", ["stylesheet"]);})(smalltalk.send(html, "_link", [])));})() : (function(){smalltalk.send(smalltalk.send(self['@swatchDesign'], "_asJQuery", []), "_remove", []);return (self['@swatchDesign']=nil);})();
 return self;}
 }),
 smalltalk.Maglev.klass);

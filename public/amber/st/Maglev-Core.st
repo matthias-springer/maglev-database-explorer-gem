@@ -112,7 +112,7 @@ showReloadObjectWindow: oop
 	^ window
 ! !
 
-Maglev class instanceVariableNames: 'instance defaultWorkspaceId persistentRootId maglevSystemId evalObjectId'!
+Maglev class instanceVariableNames: 'instance defaultWorkspaceId persistentRootId maglevSystemId evalObjectId swatchDesign'!
 
 !Maglev class methodsFor: 'accessing'!
 
@@ -165,6 +165,20 @@ ready
 		evalObject: (MaglevObjectSpace instance reloadObject: self evalObjectId).
 	MaglevHaltedThreadListener start.
 	MaglevWebBrowserWindow showNew.
+! !
+
+!Maglev class methodsFor: 'rendering'!
+
+swatchDesign
+	swatchDesign 
+		ifNil: [ |html|
+			html := HTMLCanvas onJQuery: 'head' asJQuery.
+			swatchDesign := html link 
+				href: 'themes/geo-bootstrap/swatch/bootstrap.css';
+				rel: 'stylesheet']
+		ifNotNil: [
+			swatchDesign asJQuery remove.
+			swatchDesign := nil].
 ! !
 
 !Maglev class methodsFor: 'singleton'!

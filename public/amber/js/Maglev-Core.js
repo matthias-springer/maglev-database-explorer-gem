@@ -216,7 +216,7 @@ referencedClasses: ["MaglevWaitingWindow"]
 smalltalk.Maglev);
 
 
-smalltalk.Maglev.klass.iVarNames = ['instance','defaultWorkspaceId','persistentRootId','maglevSystemId','evalObjectId'];
+smalltalk.Maglev.klass.iVarNames = ['instance','defaultWorkspaceId','persistentRootId','maglevSystemId','evalObjectId','swatchDesign'];
 smalltalk.addMethod(
 unescape('_defaultWorkspaceId'),
 smalltalk.method({
@@ -396,6 +396,23 @@ args: [],
 source: unescape('ready%0A%09self%20openWindow%3A%20self%20defaultWorkspaceId.%0A%09self%20openWindow%3A%20self%20persistentRootId.%0A%09self%20openWindow%3A%20self%20maglevSystemId.%0A%09MaglevObjectSpace%20instance%20%0A%09%09evalObject%3A%20%28MaglevObjectSpace%20instance%20reloadObject%3A%20self%20evalObjectId%29.%0A%09MaglevHaltedThreadListener%20start.%0A%09MaglevWebBrowserWindow%20showNew.'),
 messageSends: ["openWindow:", "defaultWorkspaceId", "persistentRootId", "maglevSystemId", "evalObject:", "instance", "reloadObject:", "evalObjectId", "start", "showNew"],
 referencedClasses: ["MaglevObjectSpace", "MaglevHaltedThreadListener", "MaglevWebBrowserWindow"]
+}),
+smalltalk.Maglev.klass);
+
+smalltalk.addMethod(
+unescape('_swatchDesign'),
+smalltalk.method({
+selector: unescape('swatchDesign'),
+category: 'rendering',
+fn: function (){
+var self=this;
+(($receiver = self['@swatchDesign']) == nil || $receiver == undefined) ? (function(){var html=nil;
+(html=smalltalk.send((smalltalk.HTMLCanvas || HTMLCanvas), "_onJQuery_", [smalltalk.send("head", "_asJQuery", [])]));return (self['@swatchDesign']=(function($rec){smalltalk.send($rec, "_href_", [unescape("themes/geo-bootstrap/swatch/bootstrap.css")]);return smalltalk.send($rec, "_rel_", ["stylesheet"]);})(smalltalk.send(html, "_link", [])));})() : (function(){smalltalk.send(smalltalk.send(self['@swatchDesign'], "_asJQuery", []), "_remove", []);return (self['@swatchDesign']=nil);})();
+return self;},
+args: [],
+source: unescape('swatchDesign%0A%09swatchDesign%20%0A%09%09ifNil%3A%20%5B%20%7Chtml%7C%0A%09%09%09html%20%3A%3D%20HTMLCanvas%20onJQuery%3A%20%27head%27%20asJQuery.%0A%09%09%09swatchDesign%20%3A%3D%20html%20link%20%0A%09%09%09%09href%3A%20%27themes/geo-bootstrap/swatch/bootstrap.css%27%3B%0A%09%09%09%09rel%3A%20%27stylesheet%27%5D%0A%09%09ifNotNil%3A%20%5B%0A%09%09%09swatchDesign%20asJQuery%20remove.%0A%09%09%09swatchDesign%20%3A%3D%20nil%5D.'),
+messageSends: ["ifNil:ifNotNil:", "onJQuery:", "asJQuery", "href:", "rel:", "link", "remove"],
+referencedClasses: ["HTMLCanvas"]
 }),
 smalltalk.Maglev.klass);
 
