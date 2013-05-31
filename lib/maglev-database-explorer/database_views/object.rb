@@ -36,7 +36,11 @@ class Object
         obj[:instVarsSize] = self.instance_variables.size
 
         ((range_from - 1)..[range_to - 1, self.instance_variables.size - 1].min).each do |index|
-          obj[:instVars][index + 1] = [self.instance_variables[index].to_database_view(depth - 1, {}, params), self.instance_variable_get(self.instance_variables[index]).to_database_view(depth - 1, {}, params)]
+          begin
+            obj[:instVars][index + 1] = [self.instance_variables[index].to_database_view(depth - 1, {}, params), self.instance_variable_get(self.instance_variables[index]).to_database_view(depth - 1, {}, params)]
+          rescue Exception => e
+            obj[:instVars][index + 1] = [self.instance_variables[index].to_database_view(depth - 1, {}, params), "(error)".to_database_view(1, {}, params)]
+          end
         end
       end
     else
