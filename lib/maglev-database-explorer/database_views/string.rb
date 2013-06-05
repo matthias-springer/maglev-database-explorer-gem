@@ -22,6 +22,10 @@ class String
     return obj
   end
 
+  primitive '__evaluate', 'evaluate'
+
+  "String compile: 'evaluateInContext: anObject ^ self evaluateInContext: anObject symbolList: GsSession currentSession symbolList'".__evaluate
+
   primitive '__evaluate_smalltalk_in_context', 'evaluateInContext:'
 end
 
