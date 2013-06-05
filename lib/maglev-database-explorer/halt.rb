@@ -1,6 +1,10 @@
 module MaglevDatabaseExplorer
   class << self
-    def halt
+    def install_rails_debugger
+      require "maglev-database-explorer/action_controller_debug_patch"
+    end
+
+    def halt(inner_exception = nil)
       halt_proc = Proc.new do
         nil.pause
       end
@@ -9,7 +13,12 @@ module MaglevDatabaseExplorer
         is_exception = eval_result[0]
 
         if is_exception
-          Thread.current.__set_exception(eval_result[1])
+          if inner_exception == nil
+            Thread.current.__set_exception(eval_result[1])
+          else
+            Thread.current.__set_exception(inner_exception)
+          end
+
           Thread.current[:is_rails_thread] = true
           eval_result[1] = Thread.current
           

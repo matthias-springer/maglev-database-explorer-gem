@@ -7,6 +7,7 @@ module MaglevDatabaseExplorer
 
       app.config.after_initialize do
         MaglevDatabaseExplorer.ensure_debug_server_running!
+        MaglevDatabaseExplorer.install_rails_debugger
       end
     end
   end
@@ -19,6 +20,5 @@ module MaglevDatabaseExplorer
   def self.eval_object
     @eval_object ||= Object.new
   end
-
 end
 
