@@ -212,7 +212,8 @@ renderStatusBarOn: html
 					envIdContainer := html span with: 'Environment ID'];
 					style: 'width: 1px;'.
 				html td with: [
-					sourceLocationContainer := html span with: 'Source location']]]].
+					sourceLocationContainer := html span with: 'Source location']]]];
+	hide.
 ! !
 
 !MaglevGsNMethodEditor class methodsFor: 'instance creation'!
@@ -305,8 +306,8 @@ renderArgsOn: html
 			html tr with: [
 				html td with: [
 					argSelect := html select
-						with: [html option with: '(self)'];
-						with: [html option with: '(receiver)'];
+					"	with: [html option with: '(self)'];
+						with: [html option with: '(receiver)'];"
 						with: [self argAndTempNames do: [:arg |
 							html option with: arg]];
 						style: 'margin-bottom: 0px;';
@@ -491,6 +492,12 @@ renderOn: html
 
 !MaglevIcon class methodsFor: 'instance creation'!
 
+bestellung
+	^ self new
+		icon: 'shopping-cart';
+		yourself
+!
+
 codeFork
 	^ self new
 		icon: 'code-fork';
@@ -511,7 +518,7 @@ globe
 
 hdd
 	^ self new
-		icon: 'hdd';
+		icon: 'book';
 		yourself
 !
 
@@ -1185,10 +1192,18 @@ renderLoadedObjectOn: html
 	|text shorted|
 	shorted := false.
 	text := object inspection copyFrom: 1 to: self maxInspection.
+
 	text size < object inspection size ifTrue: [
 		text := text, '...'. 
 		shorted := true.
 		(text at: 2) = '<' ifTrue: [text := text, '>']].
+
+	text = 'Thread' ifTrue: [text := 'Prozess'].
+	text = 'Book' ifTrue: [text := 'Buch'].
+	(text includesSubString: 'GsProcess') ifTrue: [text := 'Fehler: Division durch Null'].
+	(text includesSubString: 'Bestellung:0') ifTrue: [text := 'Erika Mustermann (05.07.2013)'].
+	(text includesSubString: 'Book:0') ifTrue: [text := 'Dreizehn bei Tisch'].
+
 	html with: [|tooltip|
 		tooltip := html span
 			data: 'toggle' with: 'tooltip';
@@ -1268,6 +1283,9 @@ renderUnloadedObjectOn: html
 		text := text, '...'. 
 		shorted := true.
 		(text at: 2) = '<' ifTrue: [text := text, '>']].
+
+(text includesSubString: 'Book:0') ifTrue: [text := 'Dreizehn bei Tisch'].
+
 	html with: [|tooltip|
 		tooltip := html span
 			data: 'toggle' with: 'tooltip';
@@ -1460,7 +1478,10 @@ MaglevObjectInline subclass: #MaglevMaglevRecordBaseInline
 !MaglevMaglevRecordBaseInline methodsFor: 'rendering'!
 
 renderObjectActionsOn: html
-	html with: (MaglevIcon hdd caption: 'MaglevRecord::Base')
+
+	(object inspection includesSubString: 'Bestellung')
+		ifTrue: [html with: (MaglevIcon bestellung)]
+		ifFalse: [html with: (MaglevIcon hdd caption: 'MaglevRecord::Base')].
 ! !
 
 MaglevObjectInline subclass: #MaglevModuleInline
@@ -2127,7 +2148,7 @@ contentTabs
 	|result|
 	result := Dictionary new.
 	self object hasInstVars 
-		ifTrue: [result at: 'Instance Variables' put: #renderInstanceVariablesOn:].
+		ifTrue: [result at: 'Objektzustand' put: #renderInstanceVariablesOn:].
 	object customTabs do: [:customTab | |selector|
 		selector := 'renderCustom', (customTab at: 2), 'On:'.
 		self class compile: selector, 'html    ', (customTab at: 3).
@@ -2186,10 +2207,10 @@ renderWindowContentOn: html
 
 renderWindowTitleContentOn: html
 	html with: object inlineViewComponentShort.
-	html with: [
+"	html with: [
 		html span
 			style: 'margin-left: 5px;';
-			with: '<0x', object oop asHexString, '>'].
+			with: '<0x', object oop asHexString, '>']."
 	self renderHeightPlaceholderOn: html.
 	html div
 		class: 'right-inline-block';
@@ -2289,8 +2310,14 @@ MaglevObjectWindow subclass: #MaglevMaglevRecordBaseWindow
 contentTabs
 	|result|
 	result := super contentTabs.
-	result at: 'Attributes' put: #renderAttributesOn:.
+	result at: 'Attribute' put: #renderAttributesOn:.
 	^ result
+!
+
+defaultTab
+	(object inspection includesSubString: 'Bestellung')
+		ifTrue: [^ 'Bestellung']
+		ifFalse: [^ 'Buchdaten'].
 !
 
 renderAttributesOn: html
@@ -2542,10 +2569,10 @@ renderWindowTitleContentOn: html
 		with: object inlineViewComponentShort;
 		with: ' < ';
 		with: object superclassObject inlineViewComponent.
-	html with: [
+	"html with: [
 		html span
 			style: 'margin-left: 5px;';
-			with: '<0x', object oop asHexString, '>'].
+			with: '<0x', object oop asHexString, '>']."
 	self renderHeightPlaceholderOn: html.
 	html div
 		class: 'right-inline-block';
@@ -2804,7 +2831,7 @@ frameIndex
 !MaglevThreadWindow methodsFor: 'interactions'!
 
 defaultTab
-	^ 'Stack Trace'
+	^ 'Programmablauf'
 !
 
 isMethodUnimportant: aString
@@ -2887,8 +2914,8 @@ trimStack
 contentTabs
 	|result|
 	result := super contentTabs.
-	result at: 'Stack Trace' put: #renderStackTraceOn:.
-	result at: 'Thread Local Storage' put: #renderLocalStorageOn:.
+	result at: 'Programmablauf' put: #renderStackTraceOn:.
+	result at: 'Prozessdaten' put: #renderLocalStorageOn:.
 	^ result
 !
 
@@ -2900,25 +2927,25 @@ renderButtonsOn: html
 			html input
 				type: 'button';
 				class: 'btn btn-primary';
-				value: 'Proceed';
+				value: 'Fortfahren';
 				style: 'margin-right: 1%; width: 24%;';
 				onClick: [self proceed].
 			html input
 				type: 'button';
 				class: 'btn btn-primary';
-				value: 'Step into';
+				value: 'Hineinspringen';
 				style: 'margin-right: 1%; width: 24%;';
 				onClick: [self stepInto].
 			html input
 				type: 'button';
 				class: 'btn btn-primary';
-				value: 'Step over';
+				value: 'Überspringen';
 				style: 'margin-right: 1%; width: 24%;';
 				onClick: [self stepOver].
 			html input
 				type: 'button';
 				class: 'btn btn-primary';
-				value: 'Trim stack';
+				value: 'Neu starten';
 				style: 'width: 25%;';
 				onClick: [self trimStack]].
 !

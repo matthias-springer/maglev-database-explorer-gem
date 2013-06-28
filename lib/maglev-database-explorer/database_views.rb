@@ -24,6 +24,8 @@ require "maglev-database-explorer/database_views/system"
 require "maglev-database-explorer/database_views/ruby_workspace"
 require "maglev-database-explorer/database_views/repository"
 require "maglev-database-explorer/database_views/maglev_record"
+require "maglev-database-explorer/database_views/book"
+require "maglev-database-explorer/database_views/bestellung"
 
 puts "Done bootstrapping classes."
 
