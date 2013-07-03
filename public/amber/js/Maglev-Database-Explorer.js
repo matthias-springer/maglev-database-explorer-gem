@@ -384,10 +384,10 @@ category: 'interactions',
 fn: function (){
 var self=this;
 smalltalk.send(smalltalk.send(self['@editorContainer'], "_asJQuery", []), "_css_with_", [unescape("background-color"), unescape("%233fb618")]);
-smalltalk.send(smalltalk.send(self['@editorContainer'], "_asJQuery", []), "_animate_timeout_", [(function($rec){smalltalk.send($rec, "_basicAt_put_", ["backgroundColor", unescape("%23ffffff")]);return smalltalk.send($rec, "_yourself", []);})(smalltalk.send((smalltalk.Object || Object), "_new", [])), (250)]);
+smalltalk.send(smalltalk.send(self['@editorContainer'], "_asJQuery", []), "_animate_timeout_", [(function($rec){smalltalk.send($rec, "_basicAt_put_", ["backgroundColor", unescape("%23ffffff")]);return smalltalk.send($rec, "_yourself", []);})(smalltalk.send((smalltalk.Object || Object), "_new", [])), (2000)]);
 return self;},
 args: [],
-source: unescape('signalSuccess%0A%09editorContainer%20asJQuery%20css%3A%20%27background-color%27%20with%3A%20%27%233fb618%27.%0A%09editorContainer%20asJQuery%20animate%3A%20%28Object%20new%20basicAt%3A%20%27backgroundColor%27%20put%3A%20%27%23ffffff%27%3B%20yourself%29%20timeout%3A%20250.'),
+source: unescape('signalSuccess%0A%09editorContainer%20asJQuery%20css%3A%20%27background-color%27%20with%3A%20%27%233fb618%27.%0A%09editorContainer%20asJQuery%20animate%3A%20%28Object%20new%20basicAt%3A%20%27backgroundColor%27%20put%3A%20%27%23ffffff%27%3B%20yourself%29%20timeout%3A%202000.'),
 messageSends: ["css:with:", "asJQuery", "animate:timeout:", "basicAt:put:", "yourself", "new"],
 referencedClasses: ["Object"]
 }),
@@ -555,12 +555,12 @@ selector: unescape('renderArgsOn%3A'),
 category: 'rendering',
 fn: function (html){
 var self=this;
-(function($rec){smalltalk.send($rec, "_with_", [(function(){return smalltalk.send(smalltalk.send(html, "_tbody", []), "_with_", [(function(){return smalltalk.send(smalltalk.send(html, "_tr", []), "_with_", [(function(){smalltalk.send(smalltalk.send(html, "_td", []), "_with_", [(function(){(self['@argSelect']=(function($rec){smalltalk.send($rec, "_with_", [(function(){return smalltalk.send(smalltalk.send(self, "_argAndTempNames", []), "_do_", [(function(arg){return smalltalk.send(smalltalk.send(html, "_option", []), "_with_", [arg]);})]);})]);smalltalk.send($rec, "_style_", [unescape("margin-bottom%3A%200px%3B")]);return smalltalk.send($rec, "_onChange_", [(function(){return smalltalk.send(self, "_renderArg", []);})]);})(smalltalk.send(html, "_select", [])));return (self['@argValueBox']=smalltalk.send(html, "_div", []));})]);return (function($rec){smalltalk.send($rec, "_with_", [(function(){return (self['@argValueBox']=smalltalk.send(html, "_div", []));})]);return smalltalk.send($rec, "_style_", [unescape("padding-left%3A%205px%3B")]);})(smalltalk.send(html, "_td", []));})]);})]);})]);return smalltalk.send($rec, "_style_", [unescape("margin-top%3A%205px%3B")]);})(smalltalk.send(html, "_table", []));
+(function($rec){smalltalk.send($rec, "_with_", [(function(){return smalltalk.send(smalltalk.send(html, "_tbody", []), "_with_", [(function(){return smalltalk.send(smalltalk.send(html, "_tr", []), "_with_", [(function(){smalltalk.send(smalltalk.send(html, "_td", []), "_with_", [(function(){(self['@argSelect']=(function($rec){smalltalk.send($rec, "_with_", [(function(){return smalltalk.send(smalltalk.send(html, "_option", []), "_with_", [unescape("%28Bestellung%29")]);})]);smalltalk.send($rec, "_with_", [(function(){return smalltalk.send(smalltalk.send(html, "_option", []), "_with_", [unescape("%28receiver%29")]);})]);smalltalk.send($rec, "_with_", [(function(){return smalltalk.send(smalltalk.send(self, "_argAndTempNames", []), "_do_", [(function(arg){return smalltalk.send(smalltalk.send(html, "_option", []), "_with_", [arg]);})]);})]);smalltalk.send($rec, "_style_", [unescape("margin-bottom%3A%200px%3B")]);return smalltalk.send($rec, "_onChange_", [(function(){return smalltalk.send(self, "_renderArg", []);})]);})(smalltalk.send(html, "_select", [])));return (self['@argValueBox']=smalltalk.send(html, "_div", []));})]);return (function($rec){smalltalk.send($rec, "_with_", [(function(){return (self['@argValueBox']=smalltalk.send(html, "_div", []));})]);return smalltalk.send($rec, "_style_", [unescape("padding-left%3A%205px%3B")]);})(smalltalk.send(html, "_td", []));})]);})]);})]);return smalltalk.send($rec, "_style_", [unescape("margin-top%3A%205px%3B")]);})(smalltalk.send(html, "_table", []));
 smalltalk.send(self, "_renderArg", []);
 return self;},
 args: ["html"],
-source: unescape('renderArgsOn%3A%20html%0A%09html%20table%20with%3A%20%5B%0A%09%09html%20tbody%20with%3A%20%5B%0A%09%09%09html%20tr%20with%3A%20%5B%0A%09%09%09%09html%20td%20with%3A%20%5B%0A%09%09%09%09%09argSelect%20%3A%3D%20html%20select%0A%09%09%09%09%09%22%09with%3A%20%5Bhtml%20option%20with%3A%20%27%28self%29%27%5D%3B%0A%09%09%09%09%09%09with%3A%20%5Bhtml%20option%20with%3A%20%27%28receiver%29%27%5D%3B%22%0A%09%09%09%09%09%09with%3A%20%5Bself%20argAndTempNames%20do%3A%20%5B%3Aarg%20%7C%0A%09%09%09%09%09%09%09html%20option%20with%3A%20arg%5D%5D%3B%0A%09%09%09%09%09%09style%3A%20%27margin-bottom%3A%200px%3B%27%3B%0A%09%09%09%09%09%09onChange%3A%20%5Bself%20renderArg%5D.%0A%09%09%09%09%09argValueBox%20%3A%3D%20html%20div%5D.%0A%09%09%09%09html%20td%20%0A%09%09%09%09%09with%3A%20%5BargValueBox%20%3A%3D%20html%20div%5D%3B%0A%09%09%09%09%09style%3A%20%27padding-left%3A%205px%3B%27%5D%5D%5D%3B%0A%09style%3A%20%27margin-top%3A%205px%3B%27.%0A%09self%20renderArg.'),
-messageSends: ["with:", "tbody", "tr", "td", "do:", "argAndTempNames", "option", "style:", "onChange:", "renderArg", "select", "div", "table"],
+source: unescape('renderArgsOn%3A%20html%0A%09html%20table%20with%3A%20%5B%0A%09%09html%20tbody%20with%3A%20%5B%0A%09%09%09html%20tr%20with%3A%20%5B%0A%09%09%09%09html%20td%20with%3A%20%5B%0A%09%09%09%09%09argSelect%20%3A%3D%20html%20select%0A%09%09%09%09%09%09with%3A%20%5Bhtml%20option%20with%3A%20%27%28Bestellung%29%27%5D%3B%0A%09%09%09%09%09%09with%3A%20%5Bhtml%20option%20with%3A%20%27%28receiver%29%27%5D%3B%0A%09%09%09%09%09%09with%3A%20%5Bself%20argAndTempNames%20do%3A%20%5B%3Aarg%20%7C%0A%09%09%09%09%09%09%09html%20option%20with%3A%20arg%5D%5D%3B%0A%09%09%09%09%09%09style%3A%20%27margin-bottom%3A%200px%3B%27%3B%0A%09%09%09%09%09%09onChange%3A%20%5Bself%20renderArg%5D.%0A%09%09%09%09%09argValueBox%20%3A%3D%20html%20div%5D.%0A%09%09%09%09html%20td%20%0A%09%09%09%09%09with%3A%20%5BargValueBox%20%3A%3D%20html%20div%5D%3B%0A%09%09%09%09%09style%3A%20%27padding-left%3A%205px%3B%27%5D%5D%5D%3B%0A%09style%3A%20%27margin-top%3A%205px%3B%27.%0A%09self%20renderArg.'),
+messageSends: ["with:", "tbody", "tr", "td", "option", "do:", "argAndTempNames", "style:", "onChange:", "renderArg", "select", "div", "table"],
 referencedClasses: []
 }),
 smalltalk.MaglevGsNMethodDebugEditor);
@@ -576,12 +576,12 @@ var rangeFrom=nil;
 var rangeTo=nil;
 smalltalk.send(self, "_renderMethodObject", [], smalltalk.MaglevGsNMethodEditor);
  self['@editor'].setSelection(
-		{line: self._sourceOffsetY(), ch: self._sourceOffsetX()}, 
-		{line: self._sourceOffsetY(), ch: self._sourceOffsetX()}); ;
+		{line: self._sourceOffsetY() - 2, ch: self._sourceOffsetX() + 15 + 20}, 
+		{line: self._sourceOffsetY() - 2, ch: self._sourceOffsetX() + 15 + 20}); ;
 smalltalk.send(self['@editor'], "_replaceSelection_", [unescape("%u26A1")]);
 return self;},
 args: [],
-source: unescape('renderMethodObject%0A%09%7CrangeFrom%20rangeTo%7C%0A%09super%20renderMethodObject.%0A%09%3C%20self%5B%27@editor%27%5D.setSelection%28%0A%09%09%7Bline%3A%20self._sourceOffsetY%28%29%2C%20ch%3A%20self._sourceOffsetX%28%29%7D%2C%20%0A%09%09%7Bline%3A%20self._sourceOffsetY%28%29%2C%20ch%3A%20self._sourceOffsetX%28%29%7D%29%3B%20%3E.%0A%09editor%20replaceSelection%3A%20%27%u26A1%27.'),
+source: unescape('renderMethodObject%0A%09%7CrangeFrom%20rangeTo%7C%0A%09super%20renderMethodObject.%0A%09%3C%20self%5B%27@editor%27%5D.setSelection%28%0A%09%09%7Bline%3A%20self._sourceOffsetY%28%29%20-%202%2C%20ch%3A%20self._sourceOffsetX%28%29%20+%2015%20+%2020%7D%2C%20%0A%09%09%7Bline%3A%20self._sourceOffsetY%28%29%20-%202%2C%20ch%3A%20self._sourceOffsetX%28%29%20+%2015%20+%2020%7D%29%3B%20%3E.%0A%09editor%20replaceSelection%3A%20%27%u26A1%27.'),
 messageSends: ["renderMethodObject", "replaceSelection:"],
 referencedClasses: []
 }),
@@ -1072,10 +1072,10 @@ selector: unescape('hdd'),
 category: 'instance creation',
 fn: function (){
 var self=this;
-return (function($rec){smalltalk.send($rec, "_icon_", ["book"]);return smalltalk.send($rec, "_yourself", []);})(smalltalk.send(self, "_new", []));
+return (function($rec){smalltalk.send($rec, "_icon_", ["laptop"]);return smalltalk.send($rec, "_yourself", []);})(smalltalk.send(self, "_new", []));
 return self;},
 args: [],
-source: unescape('hdd%0A%09%5E%20self%20new%0A%09%09icon%3A%20%27book%27%3B%0A%09%09yourself'),
+source: unescape('hdd%0A%09%5E%20self%20new%0A%09%09icon%3A%20%27laptop%27%3B%0A%09%09yourself'),
 messageSends: ["icon:", "yourself", "new"],
 referencedClasses: []
 }),
@@ -1120,10 +1120,10 @@ selector: unescape('pause'),
 category: 'instance creation',
 fn: function (){
 var self=this;
-return (function($rec){smalltalk.send($rec, "_icon_", ["pause"]);return smalltalk.send($rec, "_yourself", []);})(smalltalk.send(self, "_new", []));
+return (function($rec){smalltalk.send($rec, "_icon_", ["bolt"]);return smalltalk.send($rec, "_yourself", []);})(smalltalk.send(self, "_new", []));
 return self;},
 args: [],
-source: unescape('pause%0A%09%5E%20self%20new%0A%09%09icon%3A%20%27pause%27%3B%0A%09%09yourself'),
+source: unescape('pause%0A%09%5E%20self%20new%0A%09%09icon%3A%20%27bolt%27%3B%0A%09%09yourself'),
 messageSends: ["icon:", "yourself", "new"],
 referencedClasses: []
 }),
@@ -2591,13 +2591,13 @@ var shorted=nil;
 ((($receiver = smalltalk.send(text, "__eq", ["Thread"])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return (text="Prozess");})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return (text="Prozess");})]));
 ((($receiver = smalltalk.send(text, "__eq", ["Book"])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return (text="Buch");})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return (text="Buch");})]));
 ((($receiver = smalltalk.send(text, "_includesSubString_", ["GsProcess"])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return (text="Fehler: Division durch Null");})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return (text="Fehler: Division durch Null");})]));
-((($receiver = smalltalk.send(text, "_includesSubString_", ["Bestellung:0"])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return (text=unescape("Erika%20Mustermann%20%2805.07.2013%29"));})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return (text=unescape("Erika%20Mustermann%20%2805.07.2013%29"));})]));
-((($receiver = smalltalk.send(text, "_includesSubString_", ["Book:0"])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return (text="Dreizehn bei Tisch");})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return (text="Dreizehn bei Tisch");})]));
+((($receiver = smalltalk.send(text, "_includesSubString_", ["Bestellung:0"])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return (text=unescape("Klaus%20M%FCller%20%2805.07.2013%29"));})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return (text=unescape("Klaus%20M%FCller%20%2805.07.2013%29"));})]));
+((($receiver = smalltalk.send(text, "_includesSubString_", ["Book:0"])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return (text="Computer und Notebooks");})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return (text="Computer und Notebooks");})]));
 smalltalk.send(html, "_with_", [(function(){var tooltip=nil;
-(tooltip=(function($rec){smalltalk.send($rec, "_data_with_", ["toggle", "tooltip"]);smalltalk.send($rec, "_data_with_", ["placement", "top"]);smalltalk.send($rec, "_data_with_", [unescape("original-title"), smalltalk.send(self['@object'], "_inspection", [])]);return smalltalk.send($rec, "_with_", [text]);})(smalltalk.send(html, "_span", [])));return ((($receiver = shorted).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(smalltalk.send(tooltip, "_asJQuery", []), "_tooltip", []);})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return smalltalk.send(smalltalk.send(tooltip, "_asJQuery", []), "_tooltip", []);})]));})]);
+(tooltip=(function($rec){smalltalk.send($rec, "_data_with_", ["toggle", "tooltip"]);smalltalk.send($rec, "_data_with_", ["placement", "top"]);smalltalk.send($rec, "_data_with_", [unescape("original-title"), smalltalk.send(self['@object'], "_inspection", [])]);return smalltalk.send($rec, "_with_", [text]);})(smalltalk.send(html, "_span", [])));return ((($receiver = false).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(smalltalk.send(tooltip, "_asJQuery", []), "_tooltip", []);})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return smalltalk.send(smalltalk.send(tooltip, "_asJQuery", []), "_tooltip", []);})]));})]);
 return self;},
 args: ["html"],
-source: unescape('renderLoadedObjectOn%3A%20html%0A%09%7Ctext%20shorted%7C%0A%09shorted%20%3A%3D%20false.%0A%09text%20%3A%3D%20object%20inspection%20copyFrom%3A%201%20to%3A%20self%20maxInspection.%0A%0A%09text%20size%20%3C%20object%20inspection%20size%20ifTrue%3A%20%5B%0A%09%09text%20%3A%3D%20text%2C%20%27...%27.%20%0A%09%09shorted%20%3A%3D%20true.%0A%09%09%28text%20at%3A%202%29%20%3D%20%27%3C%27%20ifTrue%3A%20%5Btext%20%3A%3D%20text%2C%20%27%3E%27%5D%5D.%0A%0A%09text%20%3D%20%27Thread%27%20ifTrue%3A%20%5Btext%20%3A%3D%20%27Prozess%27%5D.%0A%09text%20%3D%20%27Book%27%20ifTrue%3A%20%5Btext%20%3A%3D%20%27Buch%27%5D.%0A%09%28text%20includesSubString%3A%20%27GsProcess%27%29%20ifTrue%3A%20%5Btext%20%3A%3D%20%27Fehler%3A%20Division%20durch%20Null%27%5D.%0A%09%28text%20includesSubString%3A%20%27Bestellung%3A0%27%29%20ifTrue%3A%20%5Btext%20%3A%3D%20%27Erika%20Mustermann%20%2805.07.2013%29%27%5D.%0A%09%28text%20includesSubString%3A%20%27Book%3A0%27%29%20ifTrue%3A%20%5Btext%20%3A%3D%20%27Dreizehn%20bei%20Tisch%27%5D.%0A%0A%09html%20with%3A%20%5B%7Ctooltip%7C%0A%09%09tooltip%20%3A%3D%20html%20span%0A%09%09%09data%3A%20%27toggle%27%20with%3A%20%27tooltip%27%3B%0A%09%09%09data%3A%20%27placement%27%20with%3A%20%27top%27%3B%0A%09%09%09data%3A%20%27original-title%27%20with%3A%20object%20inspection%3B%0A%09%09%09with%3A%20text.%0A%09%09shorted%20ifTrue%3A%20%5Btooltip%20asJQuery%20tooltip%5D%5D.'),
+source: unescape('renderLoadedObjectOn%3A%20html%0A%09%7Ctext%20shorted%7C%0A%09shorted%20%3A%3D%20false.%0A%09text%20%3A%3D%20object%20inspection%20copyFrom%3A%201%20to%3A%20self%20maxInspection.%0A%0A%09text%20size%20%3C%20object%20inspection%20size%20ifTrue%3A%20%5B%0A%09%09text%20%3A%3D%20text%2C%20%27...%27.%20%0A%09%09shorted%20%3A%3D%20true.%0A%09%09%28text%20at%3A%202%29%20%3D%20%27%3C%27%20ifTrue%3A%20%5Btext%20%3A%3D%20text%2C%20%27%3E%27%5D%5D.%0A%0A%09text%20%3D%20%27Thread%27%20ifTrue%3A%20%5Btext%20%3A%3D%20%27Prozess%27%5D.%0A%09text%20%3D%20%27Book%27%20ifTrue%3A%20%5Btext%20%3A%3D%20%27Buch%27%5D.%0A%09%28text%20includesSubString%3A%20%27GsProcess%27%29%20ifTrue%3A%20%5Btext%20%3A%3D%20%27Fehler%3A%20Division%20durch%20Null%27%5D.%0A%09%28text%20includesSubString%3A%20%27Bestellung%3A0%27%29%20ifTrue%3A%20%5Btext%20%3A%3D%20%27Klaus%20M%FCller%20%2805.07.2013%29%27%5D.%0A%09%28text%20includesSubString%3A%20%27Book%3A0%27%29%20ifTrue%3A%20%5Btext%20%3A%3D%20%27Computer%20und%20Notebooks%27%5D.%0A%0A%09html%20with%3A%20%5B%7Ctooltip%7C%0A%09%09tooltip%20%3A%3D%20html%20span%0A%09%09%09data%3A%20%27toggle%27%20with%3A%20%27tooltip%27%3B%0A%09%09%09data%3A%20%27placement%27%20with%3A%20%27top%27%3B%0A%09%09%09data%3A%20%27original-title%27%20with%3A%20object%20inspection%3B%0A%09%09%09with%3A%20text.%0A%09%09false%20ifTrue%3A%20%5Btooltip%20asJQuery%20tooltip%5D%5D.'),
 messageSends: ["copyFrom:to:", "inspection", "maxInspection", "ifTrue:", unescape("%3C"), "size", unescape("%2C"), unescape("%3D"), "at:", "includesSubString:", "with:", "data:with:", "span", "tooltip", "asJQuery"],
 referencedClasses: []
 }),
@@ -2713,12 +2713,12 @@ var shorted=nil;
 (shorted=false);
 (text=smalltalk.send(smalltalk.send(self['@object'], "_inspection", []), "_copyFrom_to_", [(1), smalltalk.send(self, "_maxInspection", [])]));
 ((($receiver = ((($receiver = smalltalk.send(text, "_size", [])).klass === smalltalk.Number) ? $receiver <smalltalk.send(smalltalk.send(self['@object'], "_inspection", []), "_size", []) : smalltalk.send($receiver, "__lt", [smalltalk.send(smalltalk.send(self['@object'], "_inspection", []), "_size", [])]))).klass === smalltalk.Boolean) ? ($receiver ? (function(){(text=smalltalk.send(text, "__comma", ["..."]));(shorted=true);return ((($receiver = smalltalk.send(smalltalk.send(text, "_at_", [(2)]), "__eq", [unescape("%3C")])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return (text=smalltalk.send(text, "__comma", [unescape("%3E")]));})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return (text=smalltalk.send(text, "__comma", [unescape("%3E")]));})]));})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){(text=smalltalk.send(text, "__comma", ["..."]));(shorted=true);return ((($receiver = smalltalk.send(smalltalk.send(text, "_at_", [(2)]), "__eq", [unescape("%3C")])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return (text=smalltalk.send(text, "__comma", [unescape("%3E")]));})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return (text=smalltalk.send(text, "__comma", [unescape("%3E")]));})]));})]));
-((($receiver = smalltalk.send(text, "_includesSubString_", ["Book:0"])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return (text="Dreizehn bei Tisch");})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return (text="Dreizehn bei Tisch");})]));
+((($receiver = smalltalk.send(text, "_includesSubString_", ["Book:0"])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return (text="Computer und Notebooks");})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return (text="Computer und Notebooks");})]));
 smalltalk.send(html, "_with_", [(function(){var tooltip=nil;
-(tooltip=(function($rec){smalltalk.send($rec, "_data_with_", ["toggle", "tooltip"]);smalltalk.send($rec, "_data_with_", ["placement", "top"]);smalltalk.send($rec, "_data_with_", [unescape("original-title"), smalltalk.send(self['@object'], "_inspection", [])]);return smalltalk.send($rec, "_with_", [text]);})(smalltalk.send(html, "_span", [])));return ((($receiver = shorted).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(smalltalk.send(tooltip, "_asJQuery", []), "_tooltip", []);})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return smalltalk.send(smalltalk.send(tooltip, "_asJQuery", []), "_tooltip", []);})]));})]);
+(tooltip=(function($rec){smalltalk.send($rec, "_data_with_", ["toggle", "tooltip"]);smalltalk.send($rec, "_data_with_", ["placement", "top"]);smalltalk.send($rec, "_data_with_", [unescape("original-title"), smalltalk.send(self['@object'], "_inspection", [])]);return smalltalk.send($rec, "_with_", [text]);})(smalltalk.send(html, "_span", [])));return ((($receiver = false).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(smalltalk.send(tooltip, "_asJQuery", []), "_tooltip", []);})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return smalltalk.send(smalltalk.send(tooltip, "_asJQuery", []), "_tooltip", []);})]));})]);
 return self;},
 args: ["html"],
-source: unescape('renderUnloadedObjectOn%3A%20html%0A%09%7Ctext%20shorted%7C%0A%09shorted%20%3A%3D%20false.%0A%09text%20%3A%3D%20object%20inspection%20copyFrom%3A%201%20to%3A%20self%20maxInspection.%0A%09text%20size%20%3C%20object%20inspection%20size%20ifTrue%3A%20%5B%0A%09%09text%20%3A%3D%20text%2C%20%27...%27.%20%0A%09%09shorted%20%3A%3D%20true.%0A%09%09%28text%20at%3A%202%29%20%3D%20%27%3C%27%20ifTrue%3A%20%5Btext%20%3A%3D%20text%2C%20%27%3E%27%5D%5D.%0A%0A%28text%20includesSubString%3A%20%27Book%3A0%27%29%20ifTrue%3A%20%5Btext%20%3A%3D%20%27Dreizehn%20bei%20Tisch%27%5D.%0A%0A%09html%20with%3A%20%5B%7Ctooltip%7C%0A%09%09tooltip%20%3A%3D%20html%20span%0A%09%09%09data%3A%20%27toggle%27%20with%3A%20%27tooltip%27%3B%0A%09%09%09data%3A%20%27placement%27%20with%3A%20%27top%27%3B%0A%09%09%09data%3A%20%27original-title%27%20with%3A%20object%20inspection%3B%0A%09%09%09with%3A%20text.%0A%09%09shorted%20ifTrue%3A%20%5Btooltip%20asJQuery%20tooltip%5D%5D.'),
+source: unescape('renderUnloadedObjectOn%3A%20html%0A%09%7Ctext%20shorted%7C%0A%09shorted%20%3A%3D%20false.%0A%09text%20%3A%3D%20object%20inspection%20copyFrom%3A%201%20to%3A%20self%20maxInspection.%0A%09text%20size%20%3C%20object%20inspection%20size%20ifTrue%3A%20%5B%0A%09%09text%20%3A%3D%20text%2C%20%27...%27.%20%0A%09%09shorted%20%3A%3D%20true.%0A%09%09%28text%20at%3A%202%29%20%3D%20%27%3C%27%20ifTrue%3A%20%5Btext%20%3A%3D%20text%2C%20%27%3E%27%5D%5D.%0A%0A%28text%20includesSubString%3A%20%27Book%3A0%27%29%20ifTrue%3A%20%5Btext%20%3A%3D%20%27Computer%20und%20Notebooks%27%5D.%0A%0A%09html%20with%3A%20%5B%7Ctooltip%7C%0A%09%09tooltip%20%3A%3D%20html%20span%0A%09%09%09data%3A%20%27toggle%27%20with%3A%20%27tooltip%27%3B%0A%09%09%09data%3A%20%27placement%27%20with%3A%20%27top%27%3B%0A%09%09%09data%3A%20%27original-title%27%20with%3A%20object%20inspection%3B%0A%09%09%09with%3A%20text.%0A%09%09false%20ifTrue%3A%20%5Btooltip%20asJQuery%20tooltip%5D%5D.'),
 messageSends: ["copyFrom:to:", "inspection", "maxInspection", "ifTrue:", unescape("%3C"), "size", unescape("%2C"), unescape("%3D"), "at:", "includesSubString:", "with:", "data:with:", "span", "tooltip", "asJQuery"],
 referencedClasses: []
 }),
@@ -4603,12 +4603,11 @@ selector: unescape('renderVirtualClassAndClassOn%3A'),
 category: 'rendering',
 fn: function (html){
 var self=this;
-((($receiver = smalltalk.send(self['@classObject'], "__eq", [smalltalk.send(self['@object'], "_virtualClassObject", [])])).klass === smalltalk.Boolean) ? (! $receiver ? (function(){return (function($rec){smalltalk.send($rec, "_with_", [" : "]);return smalltalk.send($rec, "_with_", [smalltalk.send(smalltalk.send(self['@object'], "_virtualClassObject", []), "_inlineViewComponent", [])]);})(html);})() : nil) : smalltalk.send($receiver, "_ifFalse_", [(function(){return (function($rec){smalltalk.send($rec, "_with_", [" : "]);return smalltalk.send($rec, "_with_", [smalltalk.send(smalltalk.send(self['@object'], "_virtualClassObject", []), "_inlineViewComponent", [])]);})(html);})]));
 (function($rec){smalltalk.send($rec, "_with_", [" :: "]);return smalltalk.send($rec, "_with_", [smalltalk.send(self['@classObject'], "_inlineViewComponent", [])]);})(html);
 return self;},
 args: ["html"],
-source: unescape('renderVirtualClassAndClassOn%3A%20html%0A%09classObject%20%3D%20object%20virtualClassObject%20ifFalse%3A%20%5B%0A%09%09html%0A%09%09%09with%3A%20%27%20%3A%20%27%3B%0A%09%09%09with%3A%20object%20virtualClassObject%20inlineViewComponent%5D.%0A%09html%20%0A%09%09with%3A%20%27%20%3A%3A%20%27%3B%0A%09%09with%3A%20classObject%20inlineViewComponent.'),
-messageSends: ["ifFalse:", unescape("%3D"), "virtualClassObject", "with:", "inlineViewComponent"],
+source: unescape('renderVirtualClassAndClassOn%3A%20html%0A%09%22classObject%20%3D%20object%20virtualClassObject%20ifFalse%3A%20%5B%0A%09%09html%0A%09%09%09with%3A%20%27%20%3A%20%27%3B%0A%09%09%09with%3A%20object%20virtualClassObject%20inlineViewComponent%5D.%22%0A%09html%20%0A%09%09with%3A%20%27%20%3A%3A%20%27%3B%0A%09%09with%3A%20classObject%20inlineViewComponent.'),
+messageSends: ["with:", "inlineViewComponent"],
 referencedClasses: []
 }),
 smalltalk.MaglevObjectWindow);
@@ -5766,6 +5765,26 @@ referencedClasses: []
 smalltalk.MaglevThreadWindow);
 
 smalltalk.addMethod(
+unescape('_isMethodImportant_'),
+smalltalk.method({
+selector: unescape('isMethodImportant%3A'),
+category: 'interactions',
+fn: function (aString){
+var self=this;
+try{var unimportant=nil;
+(unimportant=["erste_rate_berechnen","versandkosten_addieren","gesamtpreis_berechnen","kauf_bestaetigen"]);
+smalltalk.send(unimportant, "_do_", [(function(str){return ((($receiver = smalltalk.send(aString, "_includesSubString_", [str])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return (function(){throw({name: 'stReturn', selector: '_isMethodImportant_', fn: function(){return true}})})();})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return (function(){throw({name: 'stReturn', selector: '_isMethodImportant_', fn: function(){return true}})})();})]));})]);
+(function(){throw({name: 'stReturn', selector: '_isMethodImportant_', fn: function(){return false}})})();
+return self;
+} catch(e) {if(e.name === 'stReturn' && e.selector === '_isMethodImportant_'){return e.fn()} throw(e)}},
+args: ["aString"],
+source: unescape('isMethodImportant%3A%20aString%0A%09%7Cunimportant%7C%0A%09unimportant%20%3A%3D%20%7B%27erste_rate_berechnen%27.%20%27versandkosten_addieren%27.%20%27gesamtpreis_berechnen%27.%20%27kauf_bestaetigen%27%7D.%0A%09unimportant%20do%3A%20%5B%3Astr%20%7C%0A%09%09%28aString%20includesSubString%3A%20str%29%20%0A%09%09%09ifTrue%3A%20%5B%5E%20true%5D%5D.%0A%09%5E%20false'),
+messageSends: ["do:", "ifTrue:", "includesSubString:"],
+referencedClasses: []
+}),
+smalltalk.MaglevThreadWindow);
+
+smalltalk.addMethod(
 unescape('_isMethodUnimportant_'),
 smalltalk.method({
 selector: unescape('isMethodUnimportant%3A'),
@@ -5781,6 +5800,27 @@ return self;
 args: ["aString"],
 source: unescape('isMethodUnimportant%3A%20aString%0A%09%7Cunimportant%7C%0A%09unimportant%20%3A%3D%20%7B%27AbstractException%20%3E%3E%27.%20%20%27AbstractException%20class%27.%20%27GsProcess%20%3E%3E%27.%20%27GsProcess%20class%27.%20%0A%09%09%09%27ProcessorScheduler%20%3E%3E%27.%20%27ProcessorScheduler%20class%27.%20%27CodeEvaluation%20class%27.%20%27RubyCompiler%20%3E%3E%27.%20%0A%09%09%09%27RubyCompiler%20class%27.%20%27onException%3Ado%3A%27.%20%27RubyProc%20%3E%3E%20callAndRescue%3A%27.%20%27_gsReturnToC%27.%20%0A%09%09%09%27%3E%3E%20onSynchronous%3Ado%3A%27.%20%27ExecBlock%20%3E%3E%20ensure%3A%27.%20%27ExecBlock%20%3E%3E%20rubyEnsure%3A%27%7D.%0A%09unimportant%20do%3A%20%5B%3Astr%20%7C%0A%09%09%28aString%20includesSubString%3A%20str%29%20%0A%09%09%09ifTrue%3A%20%5B%5E%20true%5D%5D.%0A%09%5E%20false'),
 messageSends: ["do:", "ifTrue:", "includesSubString:"],
+referencedClasses: []
+}),
+smalltalk.MaglevThreadWindow);
+
+smalltalk.addMethod(
+unescape('_newName_'),
+smalltalk.method({
+selector: unescape('newName%3A'),
+category: 'interactions',
+fn: function (aString){
+var self=this;
+try{((($receiver = smalltalk.send(aString, "_includesSubString_", ["erste_rate_berechnen"])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return (function(){throw({name: 'stReturn', selector: '_newName_', fn: function(){return unescape("Bestellung%20%20%23%20%20erste%20Rate%20berechnen")}})})();})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return (function(){throw({name: 'stReturn', selector: '_newName_', fn: function(){return unescape("Bestellung%20%20%23%20%20erste%20Rate%20berechnen")}})})();})]));
+((($receiver = smalltalk.send(aString, "_includesSubString_", ["versandkosten_addieren"])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return (function(){throw({name: 'stReturn', selector: '_newName_', fn: function(){return unescape("Bestellung%20%20%23%20%20Versandkosten%20addieren")}})})();})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return (function(){throw({name: 'stReturn', selector: '_newName_', fn: function(){return unescape("Bestellung%20%20%23%20%20Versandkosten%20addieren")}})})();})]));
+((($receiver = smalltalk.send(aString, "_includesSubString_", ["gesamtpreis_berechnen"])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return (function(){throw({name: 'stReturn', selector: '_newName_', fn: function(){return unescape("Bestellung%20%20%23%20%20Gesamtpreis%20berechnen")}})})();})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return (function(){throw({name: 'stReturn', selector: '_newName_', fn: function(){return unescape("Bestellung%20%20%23%20%20Gesamtpreis%20berechnen")}})})();})]));
+((($receiver = smalltalk.send(aString, "_includesSubString_", ["kauf_bestaetigen"])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return (function(){throw({name: 'stReturn', selector: '_newName_', fn: function(){return unescape("Bestellung%20%20%23%20%20Kauf%20best%E4tigen")}})})();})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return (function(){throw({name: 'stReturn', selector: '_newName_', fn: function(){return unescape("Bestellung%20%20%23%20%20Kauf%20best%E4tigen")}})})();})]));
+(function(){throw({name: 'stReturn', selector: '_newName_', fn: function(){return aString}})})();
+return self;
+} catch(e) {if(e.name === 'stReturn' && e.selector === '_newName_'){return e.fn()} throw(e)}},
+args: ["aString"],
+source: unescape('newName%3A%20aString%0A%09%28aString%20includesSubString%3A%20%27erste_rate_berechnen%27%29%20ifTrue%3A%20%5B%5E%20%27Bestellung%20%20%23%20%20erste%20Rate%20berechnen%27%5D.%0A%09%28aString%20includesSubString%3A%20%27versandkosten_addieren%27%29%20ifTrue%3A%20%5B%5E%20%27Bestellung%20%20%23%20%20Versandkosten%20addieren%27%5D.%0A%09%28aString%20includesSubString%3A%20%27gesamtpreis_berechnen%27%29%20ifTrue%3A%20%5B%5E%20%27Bestellung%20%20%23%20%20Gesamtpreis%20berechnen%27%5D.%0A%09%28aString%20includesSubString%3A%20%27kauf_bestaetigen%27%29%20ifTrue%3A%20%5B%5E%20%27Bestellung%20%20%23%20%20Kauf%20best%E4tigen%27%5D.%0A%09%5E%20aString'),
+messageSends: ["ifTrue:", "includesSubString:"],
 referencedClasses: []
 }),
 smalltalk.MaglevThreadWindow);
@@ -5812,11 +5852,15 @@ var html=nil;
 smalltalk.send(self['@waitForStackTrace'], "_show", []);
 smalltalk.send(self['@methodSelect'], "_clear", []);
 smalltalk.send(self['@object'], "_stackTraceMethodsWithCallback_", [(function(obj){smalltalk.send(obj, "_do_", [(function(method){var isUnimportant=nil;
-(isUnimportant=smalltalk.send(self, "_isMethodUnimportant_", [method]));return smalltalk.send(self['@methodSelect'], "_with_darker_", [(function(html){((($receiver = smalltalk.send(method, "_includesSubString_", [unescape("%28envId%200%29")])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(html, "_with_", [smalltalk.send((smalltalk.MaglevIconImage || MaglevIconImage), "_smalltalk", [])]);})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return smalltalk.send(html, "_with_", [smalltalk.send((smalltalk.MaglevIconImage || MaglevIconImage), "_smalltalk", [])]);})]));((($receiver = smalltalk.send(method, "_includesSubString_", [unescape("%28envId%201%29")])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(html, "_with_", [smalltalk.send((smalltalk.MaglevIconImage || MaglevIconImage), "_ruby", [])]);})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return smalltalk.send(html, "_with_", [smalltalk.send((smalltalk.MaglevIconImage || MaglevIconImage), "_ruby", [])]);})]));((($receiver = smalltalk.send(method, "_includesSubString_", [unescape("%28envId%201b%29")])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(html, "_with_", [smalltalk.send((smalltalk.MaglevIconImage || MaglevIconImage), "_rubySmalltalkBridge", [])]);})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return smalltalk.send(html, "_with_", [smalltalk.send((smalltalk.MaglevIconImage || MaglevIconImage), "_rubySmalltalkBridge", [])]);})]));return smalltalk.send(html, "_with_", [method]);}), isUnimportant]);})]);smalltalk.send(self['@waitForStackTrace'], "_hide", []);return ((($receiver = smalltalk.send(aBlock, "__eq", [nil])).klass === smalltalk.Boolean) ? (! $receiver ? (function(){return smalltalk.send(aBlock, "_value", []);})() : nil) : smalltalk.send($receiver, "_ifFalse_", [(function(){return smalltalk.send(aBlock, "_value", []);})]));})]);
+var isImportant=nil;
+(isUnimportant=smalltalk.send(self, "_isMethodUnimportant_", [method]));(isImportant=smalltalk.send(self, "_isMethodUnimportant_", [method]));return smalltalk.send(self['@methodSelect'], "_with_darker_", [(function(html){var x=nil;
+var m2=nil;
+((($receiver = smalltalk.send(method, "_includesSubString_", [unescape("%28envId%200%29")])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(html, "_with_", [smalltalk.send((smalltalk.MaglevIconImage || MaglevIconImage), "_smalltalk", [])]);})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return smalltalk.send(html, "_with_", [smalltalk.send((smalltalk.MaglevIconImage || MaglevIconImage), "_smalltalk", [])]);})]));((($receiver = smalltalk.send(method, "_includesSubString_", [unescape("%28envId%201%29")])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(html, "_with_", [smalltalk.send((smalltalk.MaglevIconImage || MaglevIconImage), "_ruby", [])]);})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return smalltalk.send(html, "_with_", [smalltalk.send((smalltalk.MaglevIconImage || MaglevIconImage), "_ruby", [])]);})]));((($receiver = smalltalk.send(method, "_includesSubString_", [unescape("%28envId%201b%29")])).klass === smalltalk.Boolean) ? ($receiver ? (function(){return smalltalk.send(html, "_with_", [smalltalk.send((smalltalk.MaglevIconImage || MaglevIconImage), "_rubySmalltalkBridge", [])]);})() : nil) : smalltalk.send($receiver, "_ifTrue_", [(function(){return smalltalk.send(html, "_with_", [smalltalk.send((smalltalk.MaglevIconImage || MaglevIconImage), "_rubySmalltalkBridge", [])]);})]));(m2=smalltalk.send(self, "_newName_", [method]));return (x=smalltalk.send(html, "_with_", [m2]));}), false]);})]);$('ol li').each(function(a,e) { if($(e).text().indexOf('Bestellung') == -1) {$(e).hide()} });$('ol li').each(function(a,e) { if($(e).text().indexOf('__compile') != -1) {$(e).hide()} });$('ol li').each(function(a,e) { if($(e).text().indexOf('rechnung_stellen') != -1) {$(e).hide()} });smalltalk.send(self['@waitForStackTrace'], "_hide", []);return ((($receiver = smalltalk.send(aBlock, "__eq", [nil])).klass === smalltalk.Boolean) ? (! $receiver ? (function(){return smalltalk.send(aBlock, "_value", []);})() : nil) : smalltalk.send($receiver, "_ifFalse_", [(function(){return smalltalk.send(aBlock, "_value", []);})]));})]);
+$('ol li').each(function(a,e) { if($(e).text().indexOf('Bestellung') == -1) {$(e).hide()} });
 return self;},
 args: ["aBlock"],
-source: unescape('reloadStackWithCallback%3A%20aBlock%0A%09%7Chtml%7C%0A%09waitForStackTrace%20show.%0A%09methodSelect%20clear.%0A%09object%20stackTraceMethodsWithCallback%3A%20%5B%3Aobj%20%7C%0A%09%09obj%20do%3A%20%5B%3Amethod%20%7C%20%7CisUnimportant%7C%0A%09%09%09isUnimportant%20%3A%3D%20self%20isMethodUnimportant%3A%20method.%0A%09%09%09methodSelect%0A%09%09%09%09with%3A%20%5B%3Ahtml%20%7C%20%0A%09%09%09%09%09%28method%20includesSubString%3A%20%27%28envId%200%29%27%29%0A%09%09%09%09%09%09ifTrue%3A%20%5Bhtml%20with%3A%20MaglevIconImage%20smalltalk%5D.%0A%09%09%09%09%09%28method%20includesSubString%3A%20%27%28envId%201%29%27%29%0A%09%09%09%09%09%09ifTrue%3A%20%5Bhtml%20with%3A%20MaglevIconImage%20ruby%5D.%0A%09%09%09%09%09%28method%20includesSubString%3A%20%27%28envId%201b%29%27%29%0A%09%09%09%09%09%09ifTrue%3A%20%5Bhtml%20with%3A%20MaglevIconImage%20rubySmalltalkBridge%5D.%0A%09%09%09%09%09html%20with%3A%20method%5D%20darker%3A%20isUnimportant%5D.%0A%09%09waitForStackTrace%20hide.%0A%09%09aBlock%20%3D%20nil%0A%09%09%09ifFalse%3A%20%5BaBlock%20value%5D%5D.'),
-messageSends: ["show", "clear", "stackTraceMethodsWithCallback:", "do:", "isMethodUnimportant:", "with:darker:", "ifTrue:", "includesSubString:", "with:", "smalltalk", "ruby", "rubySmalltalkBridge", "hide", "ifFalse:", unescape("%3D"), "value"],
+source: unescape('reloadStackWithCallback%3A%20aBlock%0A%09%7Chtml%7C%0A%09waitForStackTrace%20show.%0A%09methodSelect%20clear.%0A%09object%20stackTraceMethodsWithCallback%3A%20%5B%3Aobj%20%7C%0A%09%09obj%20do%3A%20%5B%3Amethod%20%7C%20%7CisUnimportant%20isImportant%7C%0A%09%09%09isUnimportant%20%3A%3D%20self%20isMethodUnimportant%3A%20method.%0A%09%09%09isImportant%20%3A%3D%20self%20isMethodUnimportant%3A%20method.%0A%09%09%09methodSelect%0A%09%09%09%09with%3A%20%5B%3Ahtml%20%7C%20%7Cx%20m2%7C%0A%09%09%09%09%09%28method%20includesSubString%3A%20%27%28envId%200%29%27%29%0A%09%09%09%09%09%09ifTrue%3A%20%5Bhtml%20with%3A%20MaglevIconImage%20smalltalk%5D.%0A%09%09%09%09%09%28method%20includesSubString%3A%20%27%28envId%201%29%27%29%0A%09%09%09%09%09%09ifTrue%3A%20%5Bhtml%20with%3A%20MaglevIconImage%20ruby%5D.%0A%09%09%09%09%09%28method%20includesSubString%3A%20%27%28envId%201b%29%27%29%0A%09%09%09%09%09%09ifTrue%3A%20%5Bhtml%20with%3A%20MaglevIconImage%20rubySmalltalkBridge%5D.%0A%09%09%09%09%09m2%20%3A%3D%20self%20newName%3A%20method.%0A%09%09%09%09%09x%20%3A%3D%20html%20with%3A%20m2%5D%20darker%3A%20false%5D.%0A%09%09%3C%24%28%27ol%20li%27%29.each%28function%28a%2Ce%29%20%7B%20if%28%24%28e%29.text%28%29.indexOf%28%27Bestellung%27%29%20%3D%3D%20-1%29%20%7B%24%28e%29.hide%28%29%7D%20%7D%29%3E.%0A%09%09%3C%24%28%27ol%20li%27%29.each%28function%28a%2Ce%29%20%7B%20if%28%24%28e%29.text%28%29.indexOf%28%27__compile%27%29%20%21%3D%20-1%29%20%7B%24%28e%29.hide%28%29%7D%20%7D%29%3E.%0A%09%09%3C%24%28%27ol%20li%27%29.each%28function%28a%2Ce%29%20%7B%20if%28%24%28e%29.text%28%29.indexOf%28%27rechnung_stellen%27%29%20%21%3D%20-1%29%20%7B%24%28e%29.hide%28%29%7D%20%7D%29%3E.%0A%09%09waitForStackTrace%20hide.%0A%09%09aBlock%20%3D%20nil%0A%09%09%09ifFalse%3A%20%5BaBlock%20value%5D%5D.%0A%09%3C%24%28%27ol%20li%27%29.each%28function%28a%2Ce%29%20%7B%20if%28%24%28e%29.text%28%29.indexOf%28%27Bestellung%27%29%20%3D%3D%20-1%29%20%7B%24%28e%29.hide%28%29%7D%20%7D%29%3E.'),
+messageSends: ["show", "clear", "stackTraceMethodsWithCallback:", "do:", "isMethodUnimportant:", "with:darker:", "ifTrue:", "includesSubString:", "with:", "smalltalk", "ruby", "rubySmalltalkBridge", "newName:", "hide", "ifFalse:", unescape("%3D"), "value"],
 referencedClasses: ["MaglevIconImage"]
 }),
 smalltalk.MaglevThreadWindow);
@@ -5881,14 +5925,14 @@ var self=this;
 (self['@waitForStackTrace']=smalltalk.send(smalltalk.send(html, "_div", []), "_with_", [(function(){return (function($rec){smalltalk.send($rec, "_with_", [smalltalk.send((smalltalk.MaglevIcon || MaglevIcon), "_wait", [])]);return smalltalk.send($rec, "_with_", [" loading..."]);})(html);})]));
 (self['@methodSelect']=smalltalk.send((smalltalk.MaglevListBox || MaglevListBox), "_new", []));
 smalltalk.send(html, "_with_", [self['@methodSelect']]);
-(function($rec){smalltalk.send($rec, "_changedCallback_", [(function(text, index){return smalltalk.send(self, "_renderFrame_", [index]);})]);smalltalk.send($rec, "_height_", [(250)]);return smalltalk.send($rec, "_style_", [unescape("width%3A%20100%25%3B")]);})(self['@methodSelect']);
+(function($rec){smalltalk.send($rec, "_changedCallback_", [(function(text, index){return smalltalk.send(self, "_renderFrame_", [index]);})]);smalltalk.send($rec, "_height_", [(150)]);return smalltalk.send($rec, "_style_", [unescape("width%3A%20550px%3B")]);})(self['@methodSelect']);
 smalltalk.send(self, "_renderButtonsOn_", [html]);
 (self['@waitingScreen']=(function($rec){smalltalk.send($rec, "_with_", [(function(){return (function($rec){smalltalk.send($rec, "_with_", [smalltalk.send((smalltalk.MaglevIcon || MaglevIcon), "_wait", [])]);return smalltalk.send($rec, "_with_", [" loading..."]);})(html);})]);return smalltalk.send($rec, "_hide", []);})(smalltalk.send(html, "_div", [])));
 (self['@methodContainer']=smalltalk.send(html, "_div", []));
 smalltalk.send(self, "_reloadStackWithCallback_", [nil]);
 return self;},
 args: ["html"],
-source: unescape('renderStackTraceOn%3A%20html%0A%09waitForStackTrace%20%3A%3D%20html%20div%0A%09%09with%3A%20%5Bhtml%0A%09%09%09%09with%3A%20MaglevIcon%20wait%3B%0A%09%09%09%09with%3A%20%27%20loading...%27%5D.%0A%09methodSelect%20%3A%3D%20MaglevListBox%20new.%0A%09html%20with%3A%20methodSelect.%0A%09methodSelect%0A%09%09changedCallback%3A%20%5B%3Atext%20%3Aindex%20%7C%20self%20renderFrame%3A%20index%5D%3B%0A%09%09height%3A%20250%3B%0A%09%09style%3A%20%27width%3A%20100%25%3B%27.%0A%09self%20renderButtonsOn%3A%20html.%0A%09waitingScreen%20%3A%3D%20html%20div%0A%09%09with%3A%20%5Bhtml%0A%09%09%09with%3A%20MaglevIcon%20wait%3B%0A%09%09%09with%3A%20%27%20loading...%27%5D%3B%0A%09%09hide.%0A%09methodContainer%20%3A%3D%20html%20div.%0A%09self%20reloadStackWithCallback%3A%20nil.'),
+source: unescape('renderStackTraceOn%3A%20html%0A%09waitForStackTrace%20%3A%3D%20html%20div%0A%09%09with%3A%20%5Bhtml%0A%09%09%09%09with%3A%20MaglevIcon%20wait%3B%0A%09%09%09%09with%3A%20%27%20loading...%27%5D.%0A%09methodSelect%20%3A%3D%20MaglevListBox%20new.%0A%09html%20with%3A%20methodSelect.%0A%09methodSelect%0A%09%09changedCallback%3A%20%5B%3Atext%20%3Aindex%20%7C%20self%20renderFrame%3A%20index%5D%3B%0A%09%09height%3A%20150%3B%0A%09%09style%3A%20%27width%3A%20550px%3B%27.%0A%09self%20renderButtonsOn%3A%20html.%0A%09waitingScreen%20%3A%3D%20html%20div%0A%09%09with%3A%20%5Bhtml%0A%09%09%09with%3A%20MaglevIcon%20wait%3B%0A%09%09%09with%3A%20%27%20loading...%27%5D%3B%0A%09%09hide.%0A%09methodContainer%20%3A%3D%20html%20div.%0A%09self%20reloadStackWithCallback%3A%20nil.'),
 messageSends: ["with:", "div", "wait", "new", "changedCallback:", "renderFrame:", "height:", "style:", "renderButtonsOn:", "hide", "reloadStackWithCallback:"],
 referencedClasses: ["MaglevIcon", "MaglevListBox"]
 }),

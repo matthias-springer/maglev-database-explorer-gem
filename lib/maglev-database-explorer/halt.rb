@@ -22,7 +22,10 @@ module MaglevDatabaseExplorer
           Thread.current[:is_rails_thread] = true
           eval_result[1] = Thread.current
           
-          halted_threads.push(Thread.current)
+          if not Thread.current[:last_exception].to_s.starts_with?('NoMethodError')
+            halted_threads.push(Thread.current)
+          end
+
           Thread.current[:manual_stop] = true
           Thread.stop
           Thread.current[:manual_stop] = false

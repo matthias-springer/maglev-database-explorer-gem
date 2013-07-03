@@ -155,7 +155,7 @@ signalFailure: aDescription
 
 signalSuccess
 	editorContainer asJQuery css: 'background-color' with: '#3fb618'.
-	editorContainer asJQuery animate: (Object new basicAt: 'backgroundColor' put: '#ffffff'; yourself) timeout: 250.
+	editorContainer asJQuery animate: (Object new basicAt: 'backgroundColor' put: '#ffffff'; yourself) timeout: 2000.
 ! !
 
 !MaglevGsNMethodEditor methodsFor: 'rendering'!
@@ -306,8 +306,8 @@ renderArgsOn: html
 			html tr with: [
 				html td with: [
 					argSelect := html select
-					"	with: [html option with: '(self)'];
-						with: [html option with: '(receiver)'];"
+						with: [html option with: '(Bestellung)'];
+						with: [html option with: '(receiver)'];
 						with: [self argAndTempNames do: [:arg |
 							html option with: arg]];
 						style: 'margin-bottom: 0px;';
@@ -324,8 +324,8 @@ renderMethodObject
 	|rangeFrom rangeTo|
 	super renderMethodObject.
 	< self['@editor'].setSelection(
-		{line: self._sourceOffsetY(), ch: self._sourceOffsetX()}, 
-		{line: self._sourceOffsetY(), ch: self._sourceOffsetX()}); >.
+		{line: self._sourceOffsetY() - 2, ch: self._sourceOffsetX() + 15 + 20}, 
+		{line: self._sourceOffsetY() - 2, ch: self._sourceOffsetX() + 15 + 20}); >.
 	editor replaceSelection: '⚡'.
 !
 
@@ -518,7 +518,7 @@ globe
 
 hdd
 	^ self new
-		icon: 'book';
+		icon: 'laptop';
 		yourself
 !
 
@@ -536,7 +536,7 @@ move
 
 pause
 	^ self new
-		icon: 'pause';
+		icon: 'bolt';
 		yourself
 !
 
@@ -1201,8 +1201,8 @@ renderLoadedObjectOn: html
 	text = 'Thread' ifTrue: [text := 'Prozess'].
 	text = 'Book' ifTrue: [text := 'Buch'].
 	(text includesSubString: 'GsProcess') ifTrue: [text := 'Fehler: Division durch Null'].
-	(text includesSubString: 'Bestellung:0') ifTrue: [text := 'Erika Mustermann (05.07.2013)'].
-	(text includesSubString: 'Book:0') ifTrue: [text := 'Dreizehn bei Tisch'].
+	(text includesSubString: 'Bestellung:0') ifTrue: [text := 'Klaus Müller (05.07.2013)'].
+	(text includesSubString: 'Book:0') ifTrue: [text := 'Computer und Notebooks'].
 
 	html with: [|tooltip|
 		tooltip := html span
@@ -1210,7 +1210,7 @@ renderLoadedObjectOn: html
 			data: 'placement' with: 'top';
 			data: 'original-title' with: object inspection;
 			with: text.
-		shorted ifTrue: [tooltip asJQuery tooltip]].
+		false ifTrue: [tooltip asJQuery tooltip]].
 !
 
 renderObjectActionsOn: html
@@ -1284,7 +1284,7 @@ renderUnloadedObjectOn: html
 		shorted := true.
 		(text at: 2) = '<' ifTrue: [text := text, '>']].
 
-(text includesSubString: 'Book:0') ifTrue: [text := 'Dreizehn bei Tisch'].
+(text includesSubString: 'Book:0') ifTrue: [text := 'Computer und Notebooks'].
 
 	html with: [|tooltip|
 		tooltip := html span
@@ -1292,7 +1292,7 @@ renderUnloadedObjectOn: html
 			data: 'placement' with: 'top';
 			data: 'original-title' with: object inspection;
 			with: text.
-		shorted ifTrue: [tooltip asJQuery tooltip]].
+		false ifTrue: [tooltip asJQuery tooltip]].
 ! !
 
 !MaglevObjectInline class methodsFor: 'instance creation'!
@@ -2165,10 +2165,10 @@ renderNavigationOn: html
 !
 
 renderVirtualClassAndClassOn: html
-	classObject = object virtualClassObject ifFalse: [
+	"classObject = object virtualClassObject ifFalse: [
 		html
 			with: ' : ';
-			with: object virtualClassObject inlineViewComponent].
+			with: object virtualClassObject inlineViewComponent]."
 	html 
 		with: ' :: ';
 		with: classObject inlineViewComponent.
@@ -2834,6 +2834,15 @@ defaultTab
 	^ 'Programmablauf'
 !
 
+isMethodImportant: aString
+	|unimportant|
+	unimportant := {'erste_rate_berechnen'. 'versandkosten_addieren'. 'gesamtpreis_berechnen'. 'kauf_bestaetigen'}.
+	unimportant do: [:str |
+		(aString includesSubString: str) 
+			ifTrue: [^ true]].
+	^ false
+!
+
 isMethodUnimportant: aString
 	|unimportant|
 	unimportant := {'AbstractException >>'.  'AbstractException class'. 'GsProcess >>'. 'GsProcess class'. 
@@ -2844,6 +2853,14 @@ isMethodUnimportant: aString
 		(aString includesSubString: str) 
 			ifTrue: [^ true]].
 	^ false
+!
+
+newName: aString
+	(aString includesSubString: 'erste_rate_berechnen') ifTrue: [^ 'Bestellung  #  erste Rate berechnen'].
+	(aString includesSubString: 'versandkosten_addieren') ifTrue: [^ 'Bestellung  #  Versandkosten addieren'].
+	(aString includesSubString: 'gesamtpreis_berechnen') ifTrue: [^ 'Bestellung  #  Gesamtpreis berechnen'].
+	(aString includesSubString: 'kauf_bestaetigen') ifTrue: [^ 'Bestellung  #  Kauf bestätigen'].
+	^ aString
 !
 
 proceed
@@ -2860,20 +2877,26 @@ reloadStackWithCallback: aBlock
 	waitForStackTrace show.
 	methodSelect clear.
 	object stackTraceMethodsWithCallback: [:obj |
-		obj do: [:method | |isUnimportant|
+		obj do: [:method | |isUnimportant isImportant|
 			isUnimportant := self isMethodUnimportant: method.
+			isImportant := self isMethodUnimportant: method.
 			methodSelect
-				with: [:html | 
+				with: [:html | |x m2|
 					(method includesSubString: '(envId 0)')
 						ifTrue: [html with: MaglevIconImage smalltalk].
 					(method includesSubString: '(envId 1)')
 						ifTrue: [html with: MaglevIconImage ruby].
 					(method includesSubString: '(envId 1b)')
 						ifTrue: [html with: MaglevIconImage rubySmalltalkBridge].
-					html with: method] darker: isUnimportant].
+					m2 := self newName: method.
+					x := html with: m2] darker: false].
+		<$('ol li').each(function(a,e) { if($(e).text().indexOf('Bestellung') == -1) {$(e).hide()} })>.
+		<$('ol li').each(function(a,e) { if($(e).text().indexOf('__compile') !!= -1) {$(e).hide()} })>.
+		<$('ol li').each(function(a,e) { if($(e).text().indexOf('rechnung_stellen') !!= -1) {$(e).hide()} })>.
 		waitForStackTrace hide.
 		aBlock = nil
 			ifFalse: [aBlock value]].
+	<$('ol li').each(function(a,e) { if($(e).text().indexOf('Bestellung') == -1) {$(e).hide()} })>.
 !
 
 selectStackFrame: anInteger
@@ -2976,8 +2999,8 @@ renderStackTraceOn: html
 	html with: methodSelect.
 	methodSelect
 		changedCallback: [:text :index | self renderFrame: index];
-		height: 250;
-		style: 'width: 100%;'.
+		height: 150;
+		style: 'width: 550px;'.
 	self renderButtonsOn: html.
 	waitingScreen := html div
 		with: [html
